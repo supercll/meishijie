@@ -1,31 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    
+    <el-container>
+      <Header></Header>
+      <el-main>
+        <div class="main">
+          <Recipe></Recipe>
+        </div>
+      </el-main>
+      <el-footer>Footer</el-footer>
+    </el-container>
+    
   </div>
 </template>
+<script>
+import Header from '@/components/header'
+import Recipe from '@/views/recipe-daquan/recipe'
+export default {
+  components: {
+    Header,
+    Recipe
+  }
+}
+</script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+<style lang="stylus">
+@import "./assets/css/index.styl";
+@import "./assets/css/over-write.styl";
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+* 
+  margin 0
+  padding 0
+body 
+  background: #fae8c8;
+.main
+  width 990px
+  margin 0 auto;
 </style>
