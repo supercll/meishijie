@@ -28,9 +28,6 @@ export default {
 </script>
 
 <style lang="stylus">
-@import "./assets/css/index.styl";
-@import "./assets/css/over-write.styl";
-
 * 
   margin 0
   padding 0

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="create">
     <h2>欢迎发布新菜谱，先介绍一下你的大作！</h2>
     <section class="create-introduce">
       <h5>标题</h5>
@@ -40,18 +40,52 @@
       <Stuff></Stuff>
     </section>
 
+    <h2>开始写步骤了！能否简单易学就看你怎么写了，加油！</h2>
+    <section class="create-introduce">
+      <Upload v-for="n in 5" :key="n"></Upload>
+      <el-button class="eaeaea add-step-button" type="primary" size="medium" icon="el-icon-plus">增加一步</el-button>
+      <h5>烹饪小技巧</h5>
+      <el-input
+        class="introduce-text"
+        type="textarea"
+        :rows="8"
+        placeholder="分享下你做这道菜的过程中的心得和小技巧吧！">
+      </el-input>
+    </section>
+
+    <el-button class="send" type="primary" size="medium" icon="el-icon-loading">搞定，提交审核</el-button>
+
   </div>
 </template>
 <script>
 import Stuff from './stuff'
+import Upload from './upload'
 export default {
-  components: {Stuff}
+  components: {Stuff,Upload}
 }
 </script>
 <style lang="stylus">
+
 .create-introduce 
   background-color #fff
   padding 20px
+
+  .add-step-button
+    margin-left 100px
+
+.create
+  width 100%
+
+  .send
+    // ff3232()
+    height: 70px;
+    width: 220px;
+    background #ff3232
+    color #fff
+    border none
+    margin 20px auto
+    display block
+    
 
   h5 
     margin 20px 0
@@ -67,6 +101,7 @@ export default {
   .el-textarea
     width 60%
     margin-left 10px
+
 
 
 </style>
