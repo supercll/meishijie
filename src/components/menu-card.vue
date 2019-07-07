@@ -1,6 +1,6 @@
 <template>
   <el-row class="menu-card" type="flex" justify="start">
-    <el-col  v-for="(o) in 8" :key="o" style="flex:none;">
+    <el-col  v-for="(o) in 8" :key="o" style="flex:none;" :style="{'margin-left':marginLeft+'px'}">
       <el-card :body-style="{ padding: '0px' }">
         <img src="http://site.meishij.net/r/52/75/2268802/a2268802_142217122916147.jpg" class="image">
         <div style="padding: 14px;">
@@ -14,6 +14,17 @@
     </el-col>
   </el-row>
 </template>
+<script>
+export default {
+  props:{
+    marginLeft: {
+      type: Number,
+      default: 22
+    }
+  }
+}
+</script>
+
 <style lang="stylus">
 .menu-card 
   flex-wrap wrap

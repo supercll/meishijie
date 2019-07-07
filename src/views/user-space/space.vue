@@ -44,19 +44,25 @@
     <!-- v-model="activeName" -->
     <el-tabs class="user-nav"  @tab-click="handleClick">
       <el-tab-pane label="作品" name="first"></el-tab-pane>
-      <el-tab-pane label="粉丝" name="second"></el-tab-pane>
-      <el-tab-pane label="关注" name="third"></el-tab-pane>
+      <el-tab-pane label="我的粉丝" name="second"></el-tab-pane>
+      <el-tab-pane label="我的关注" name="third"></el-tab-pane>
       <el-tab-pane label="收藏" name="fourth"></el-tab-pane>
     </el-tabs>
 
     <div class="user-info-show">
-      
+      <!-- 作品 & 收藏 布局 -->
+      <!-- <menu-card :margin-left="13"></menu-card> -->
+      <!-- 粉丝 & 关注 布局 -->
+      <Fans></Fans>
     </div>
 
   </div>
 </template>
 <script>
+import MenuCard from '@/components/menu-card.vue'
+import Fans from './fans'
 export default {
+  components: {MenuCard, Fans},
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
@@ -134,6 +140,7 @@ export default {
   .user-info-show
     min-height 300px
     background #fff
+    padding-top 20px
   .el-tabs__item.is-active 
     color: #ff3232;
   .el-tabs__active-bar

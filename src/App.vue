@@ -7,7 +7,7 @@
         <div class="main">
           <!-- <Recipe></Recipe> -->
           <!-- <Create></Create> -->
-          <Space></Space>
+          <!-- <Space></Space> -->
         </div>
       </el-main>
       <el-footer>Footer</el-footer>
