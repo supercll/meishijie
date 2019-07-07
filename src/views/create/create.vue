@@ -75,7 +75,9 @@ export default {
 
 .create
   width 100%
-
+  h2
+    text-align center
+    margin 20px 0
   .send
     // ff3232()
     height: 70px;
