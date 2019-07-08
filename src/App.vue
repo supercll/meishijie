@@ -8,6 +8,7 @@
           <!-- <Recipe></Recipe> -->
           <!-- <Create></Create> -->
           <!-- <Space></Space> -->
+          <Detail></Detail>
         </div>
       </el-main>
       <el-footer>Footer</el-footer>
@@ -20,12 +21,14 @@ import Header from '@/components/header'
 import Recipe from '@/views/recipe-daquan/recipe'
 import Create from '@/views/create/create'
 import Space from '@/views/user-space/space'
+import Detail from '@/views/detail/detail'
 export default {
   components: {
     Header,
     Recipe,
     Create,
-    Space
+    Space,
+    Detail
   }
 }
 </script>
