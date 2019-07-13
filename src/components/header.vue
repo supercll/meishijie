@@ -15,10 +15,10 @@
             </el-input>
           </el-col>
           <el-col :span="6" :offset="3" class="avatar-box">
-            <a href="">
+            <router-link :to="{name: 'space'}">
               <el-avatar style="vertical-align: middle;" shape="square" size="medium" :src="avatarDefaultUrl"></el-avatar>
-            </a>
-            <a href="" class="user-name">辣手摧花</a>
+            </router-link>
+            <router-link :to="{name: 'space'}" class="user-name">辣手摧花</router-link>
             <a href="" class="collection">收藏</a>
           </el-col>
         </el-row>
@@ -34,6 +34,7 @@
 <script>
 import Menus from '@/components/menus'
 export default {
+  name: 'headers',
   data(){
     return {
       avatarDefaultUrl: 'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'

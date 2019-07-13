@@ -61,6 +61,7 @@
 import Stuff from './stuff'
 import Upload from './upload'
 export default {
+  name: 'create',
   components: {Stuff,Upload}
 }
 </script>

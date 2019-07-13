@@ -8,7 +8,8 @@
           <!-- <Recipe></Recipe> -->
           <!-- <Create></Create> -->
           <!-- <Space></Space> -->
-          <Detail></Detail>
+          <!-- <Detail></Detail> -->
+          <router-view></router-view>
         </div>
       </el-main>
       <el-footer>Footer</el-footer>
