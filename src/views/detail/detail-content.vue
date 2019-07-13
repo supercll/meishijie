@@ -3,7 +3,7 @@
     <div class="detail-materials">
       <p class=""><strong>“</strong>冬天吃火锅是最幸福的事。<strong>”</strong></p>
       <h2>用料</h2>
-      <div class="detail-materials-box">
+      <div class="detail-materials-box clearfix">
         <h3>主料</h3>
         <ul>
           <li class="" v-for="n in 5" :key="n">
@@ -14,48 +14,107 @@
           </li>
         </ul>
       </div>
+      <div class="detail-materials-box clearfix">
+        <h3>辅料</h3>
+        <ul>
+          <li class="" v-for="n in 5" :key="n">
+            <h4>
+              姜
+            </h4>
+            <span>20克</span>
+          </li>
+        </ul>
+      </div>
     </div>
-
+    <div class="detail-explain">
+      <h2>韩国部队火锅的做法</h2>
+      <section class="detail-section clearfix" v-for="n in 5" :key="n">
+        <em class="detail-number">{{n}}.</em>
+        <div class="detail-explain-desc">
+          <p>把蒜片爆香后倒入辣酱50克（没韩国辣酱，我用辣酱顶替）翻炒，倒入开水煮开，加入适量盐。</p>
+          <img class="conimg" src="https://s1.st.meishij.net/rs/105/168/9229605/n9229605_148232985280080.jpg" alt="">
+        </div>
+      </section>
+      <div class="skill">
+        <h2>烹饪技巧</h2>
+        <p>八爪鱼不了煮久，不然缩水很严重。八爪鱼不了煮久，不然缩水很严重。八爪鱼不了煮久，不然缩水很严重。八爪鱼不了煮久，不然缩水很严重。</p>
+      </div>
+    </div>
   </section>
 </template>
 <style lang="stylus">
 .detail-content
   margin-top 20px
   h2 
-    font-size: 24px;
-    color: #333;
-    height: 66px;
-    line-height: 66px;
-    border-bottom: 1px solid #eee;
-    text-indent: 24px;
-    font-family: Microsoft Yahei;
-    display: block;
+    font-size 24px
+    color #333
+    height 66px
+    line-height 66px
+    border-bottom 1px solid #eee
+    text-indent 24px
+    font-family Microsoft Yahei
+    display block
   .detail-materials
     background-color #fff
     > p 
-      line-height: 24px;
-      font-size: 14px;
-      padding: 20px 24px 10px;
-      color: #666;
+      line-height 24px
+      font-size 14px
+      padding 20px 24px 10px
+      color #666
     .detail-materials-box
+      margin-bottom 20px
       h3 
-        width: 48px;
-        height: 22px;
-        color: #999;
-        background: #f5f5f5;
-        border: 1px solid #ddd;
-        text-align: center;
-        line-height: 24px;
-        margin: 14px 5px 14px 25px;
-        float: left;
+        width 48px
+        height 22px
+        color #999
+        background #f5f5f5
+        border 1px solid #ddd
+        text-align center
+        line-height 24px
+        margin 14px 5px 14px 25px
+        float left
       ul 
-        float: left;
-        width: 590px;
+        float left
+        width 910px
         li 
-          float: left;
-          width: 294px;
-          border-right: 1px solid #eee;
-          height: 54px;
-          border-bottom: 1px solid #eee;
+          float left
+          box-sizing border-box
+          width 217px
+          margin 5px
+          height 54px
+          padding-left 30px
+          border 1px solid #eee
+  .detail-explain
+    background-color #fff
+    padding-bottom 20px
+    .detail-section
+      .detail-number
+        font-size 50px
+        color #ff3232
+        font-style italic
+        text-align center
+        font-family arial
+        height 50px
+        width 100px
+        display block
+        float left
+        line-height 50px
+      .detail-explain-desc
+        float left
+        width 650px
+        overflow hidden
+        p 
+          line-height 24px
+          color #666
+          padding 10px 20px 10px 0px
+          position relative
+          font-size 14px
+        img 
+          max-width 550px
+    .skill
+      p 
+        font-size 12px
+        padding-left 100px
+        padding-top 10px
 </style>
 
