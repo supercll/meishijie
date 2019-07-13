@@ -19,7 +19,7 @@
               <el-avatar style="vertical-align: middle;" shape="square" size="medium" :src="avatarDefaultUrl"></el-avatar>
             </router-link>
             <router-link :to="{name: 'space'}" class="user-name">辣手摧花</router-link>
-            <a href="" class="collection">收藏</a>
+            <router-link :to="{name: 'collection'}" class="collection">收藏</router-link>
           </el-col>
         </el-row>
       </div>

@@ -42,18 +42,19 @@
     </div>
 
     <!-- v-model="activeName" -->
-    <el-tabs class="user-nav"  @tab-click="handleClick">
-      <el-tab-pane label="作品" name="first"></el-tab-pane>
-      <el-tab-pane label="我的粉丝" name="second"></el-tab-pane>
-      <el-tab-pane label="我的关注" name="third"></el-tab-pane>
-      <el-tab-pane label="收藏" name="fourth"></el-tab-pane>
+    <el-tabs v-model="activeName" class="user-nav"  @tab-click="handleClick">
+      <el-tab-pane label="作品" name="works"></el-tab-pane>
+      <el-tab-pane label="我的粉丝" name="fans"></el-tab-pane>
+      <el-tab-pane label="我的关注" name="follower"></el-tab-pane>
+      <el-tab-pane label="收藏" name="collection"></el-tab-pane>
     </el-tabs>
 
     <div class="user-info-show">
       <!-- 作品 & 收藏 布局 -->
       <!-- <menu-card :margin-left="13"></menu-card> -->
       <!-- 粉丝 & 关注 布局 -->
-      <Fans></Fans>
+      <!-- <Fans></Fans> -->
+      <router-view></router-view>
     </div>
 
   </div>
@@ -63,9 +64,27 @@ import MenuCard from '@/components/menu-card.vue'
 import Fans from './fans'
 export default {
   components: {MenuCard, Fans},
+  data(){
+    return {
+      activeName: 'works'
+    }
+  },
+  watch: {
+    $route: {
+      handler(){
+        if(this.activeName !== this.$route.name){
+          this.activeName = this.$route.name;
+        }
+      },
+      immediate: true
+    }
+  },
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event);
+      const {name} = tab;
+      this.$router.push({
+        name: name
+      })
     }
   }
 }
