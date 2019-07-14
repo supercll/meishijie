@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <el-carousel :interval="1000" type="card" height="200px">
+    <el-carousel :interval="5000" type="card" height="300px">
       <el-carousel-item v-for="item in 6" :key="item">
-        <h3 class="medium">{{ item }}</h3>
+        <img src="https://s1.st.meishij.net/rs/208/102/1025708/n1025708_156144944939153.jpg" width="100%" height="300px" alt="">
       </el-carousel-item>
     </el-carousel>
     <div>
