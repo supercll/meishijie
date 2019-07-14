@@ -9,8 +9,7 @@
             <span>26 评论</span>
             <em>XXXXX</em>
           </div>
-        </router-link>
-        
+        </router-link> 
       </el-card>
     </el-col>
   </el-row>

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Home from './views/home/Home.vue'
 
 const Recipe = () => import( '@/views/recipe-daquan/recipe' );
 const Create = () => import( '@/views/create/create' );
