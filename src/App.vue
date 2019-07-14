@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    
     <el-container>
       <Header></Header>
       <el-main>
@@ -8,7 +7,11 @@
           <router-view></router-view>
         </div>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>
+        <div class="footer">
+          Copyright © 2019 - 2019 
+        </div>
+      </el-footer>
     </el-container>
     
   </div>
@@ -24,8 +27,12 @@ export default {
 
 <style lang="stylus">
 body 
-  background: #fae8c8;
+  background: #fae8c8
 .main
   width 990px
-  margin 0 auto;
+  margin 0 auto
+.footer
+  text-align center
+  height 42px
+  line-height 42px
 </style>
