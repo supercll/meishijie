@@ -5,10 +5,6 @@
       <Header></Header>
       <el-main>
         <div class="main">
-          <!-- <Recipe></Recipe> -->
-          <!-- <Create></Create> -->
-          <!-- <Space></Space> -->
-          <!-- <Detail></Detail> -->
           <router-view></router-view>
         </div>
       </el-main>
@@ -19,25 +15,14 @@
 </template>
 <script>
 import Header from '@/components/header'
-import Recipe from '@/views/recipe-daquan/recipe'
-import Create from '@/views/create/create'
-import Space from '@/views/user-space/space'
-import Detail from '@/views/detail/detail'
 export default {
   components: {
-    Header,
-    Recipe,
-    Create,
-    Space,
-    Detail
+    Header
   }
 }
 </script>
 
 <style lang="stylus">
-* 
-  margin 0
-  padding 0
 body 
   background: #fae8c8;
 .main

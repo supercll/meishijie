@@ -80,7 +80,7 @@
           float left
           box-sizing border-box
           width 217px
-          margin 5px
+          margin 0 5px 5px 5px
           height 54px
           padding-left 30px
           border 1px solid #eee
