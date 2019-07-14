@@ -11,6 +11,7 @@ const MenuList = () => import( /* webpackChunkName: "space" */ '@/views/user-spa
 const Fans = () => import( /* webpackChunkName: "space" */ '@/views/user-space/fans');
 
 const Detail = () => import( '@/views/detail/detail');
+const Login = () => import( '@/views/login');
 
 const viewsRoute = [
   {
@@ -78,6 +79,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     ...viewsRoute
   ]
