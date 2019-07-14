@@ -160,11 +160,32 @@ export default {
     min-height 300px
     background #fff
     padding-top 20px
+    .info-empty
+      width 100% 
+      min-height inherit
+      display flex
+      align-items center
+      justify-content:center;
+      p 
+        text-align center
+        font-size 12px
+      a 
+        text-align center
+        display block
+        height 48px
+        width 200px
+        line-height 48px
+        font-size 14px
+        background #ff3232
+        color #fff
+        font-weight bold
+        margin 0px auto
   .el-tabs__item.is-active 
     color: #ff3232;
   .el-tabs__active-bar
     background-color: #ff3232;
   .el-tabs__nav-wrap::after
     background-color: transparent;
+  
 </style>
 
