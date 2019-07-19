@@ -10,6 +10,7 @@
       :rows="8"
       placeholder="请输入内容">
     </el-input>
+    <i class="delete-icon el-icon-close"></i>
   </div>
 </template>
 <style lang="stylus">
