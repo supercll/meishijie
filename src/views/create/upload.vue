@@ -1,6 +1,6 @@
 <template>
   <div class="step clearfix">
-    <div class="step-number">1.</div>
+    <div class="step-number">{{n}}.</div>
     <div class="upload-box">
       <img src="https://s1.c.meishij.net/n/images/upload_step_img.png" alt="">
     </div>
@@ -10,8 +10,20 @@
       :rows="8"
       placeholder="请输入内容">
     </el-input>
+    <i class="delete-icon el-icon-close"></i>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    n: {
+      type: Number,
+      default: 1
+    }
+  }
+}
+</script>
+
 <style lang="stylus">
 .step
   margin-bottom 20px

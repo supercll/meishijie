@@ -1,6 +1,6 @@
 // vue.config.js
 module.exports = {
-  baseUrl: '/',
+  publicPath: '/',
   devServer: {
       proxy: {
           '/api': {

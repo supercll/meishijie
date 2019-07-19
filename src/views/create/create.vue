@@ -39,15 +39,33 @@
     <h2>记录所有原材料</h2>
     <section class="create-introduce">
       <h5>主料</h5>
-      <Stuff></Stuff>
+      <Stuff 
+        type="main" 
+        :material="material.main_material"
+        @change-material="(data) => changeMaterial('main',data)"
+      ></Stuff>
       <h5>辅料</h5>
-      <Stuff></Stuff>
+      <Stuff 
+        type="accessories" 
+        :material="material.accessories_material"
+        @change-material="(data) => changeMaterial('accessories', data)"
+      ></Stuff>
     </section>
 
     <h2>开始写步骤了！能否简单易学就看你怎么写了，加油！</h2>
     <section class="create-introduce">
-      <Upload v-for="n in 5" :key="n"></Upload>
-      <el-button class="eaeaea add-step-button" type="primary" size="medium" icon="el-icon-plus">增加一步</el-button>
+      <Upload 
+        v-for="(item,index) in steps" 
+        :key="index"
+        :n="index+1"
+      ></Upload>
+      <el-button 
+        class="eaeaea add-step-button" 
+        type="primary" 
+        size="medium" 
+        icon="el-icon-plus"
+        @click="addStep"
+      >增加一步</el-button>
       <h5>烹饪小技巧</h5>
       <el-input
         class="introduce-text"
@@ -65,7 +83,11 @@
 import Stuff from './stuff'
 import Upload from './upload'
 import {getProperty} from '@/service/api'
-const properties_placeholder = { "craft": "请选择工艺", "flavor": "请选择口味", "hard": "请选择难度", "people": "请选择人数" } 
+const properties_placeholder = { "craft": "请选择工艺", "flavor": "请选择口味", "hard": "请选择难度", "people": "请选择人数" };
+const step_struct = {
+  img_url: '',
+  describe: '',
+} 
 export default {
   name: 'create',
   components: {Stuff,Upload},
@@ -74,7 +96,12 @@ export default {
     return {
       value: '',
       properties: [],
-      selectProperties: {}
+      selectProperties: {},
+      material: {
+        main_material:[],  // 主料
+        accessories_material: [] // 辅料
+      },
+      steps: Array(3).fill(1).map(item => Object.assign(step_struct))
     }
   },
   async mounted(){
@@ -84,6 +111,19 @@ export default {
     })
   },
   methods:{
+    // 主料，辅料 变化时
+    changeMaterial(type, data){
+      if(type === 'main') {
+        this.material.main_material = data;
+      }
+      if(type === 'accessories') {
+        this.material.accessories_material = data;
+      }
+    },
+    // 增加步骤
+    addStep(){
+      this.steps.push(Object.assign(step_struct));
+    }
   }
 }
 </script>
