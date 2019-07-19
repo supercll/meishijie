@@ -8,13 +8,17 @@
       <el-input class="create-input" placeholder="请输入内容"></el-input>
       <h5>属性</h5>
       <div>
-        <el-select v-model="value" placeholder="请选择" v-for="n in 3"
-            :key="n">
+        <el-select 
+          :placeholder="$options.properties_placeholder[item.title]" 
+          v-model="selectProperties[item.title]" 
+          v-for="item in properties" 
+          :key="item.parent_type"
+        >
           <el-option
-            v-for="item in 10"
-            :key="item"
-            :label="item"
-            :value="item">
+            v-for="option in item.list"
+            :key="option.type"
+            :label="option.name"
+            :value="option.type">
           </el-option>
         </el-select>
       </div>
@@ -60,9 +64,27 @@
 <script>
 import Stuff from './stuff'
 import Upload from './upload'
+import {getProperty} from '@/service/api'
+const properties_placeholder = { "craft": "请选择工艺", "flavor": "请选择口味", "hard": "请选择难度", "people": "请选择人数" } 
 export default {
   name: 'create',
-  components: {Stuff,Upload}
+  components: {Stuff,Upload},
+  properties_placeholder,
+  data(){
+    return {
+      value: '',
+      properties: [],
+      selectProperties: {}
+    }
+  },
+  async mounted(){
+    this.properties = (await getProperty()).data;
+    this.properties.forEach(item => {
+      this.$set(this.selectProperties, item.title, '');
+    })
+  },
+  methods:{
+  }
 }
 </script>
 <style lang="stylus">
