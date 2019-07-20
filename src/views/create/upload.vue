@@ -8,17 +8,42 @@
       class="introduce-text"
       type="textarea"
       :rows="8"
-      placeholder="请输入内容">
+      placeholder="请输入内容"
+      v-model="step.describe"
+    >
     </el-input>
-    <i class="delete-icon el-icon-close"></i>
+    <i 
+      class="delete-icon el-icon-close" 
+      :style="{display: length <= 1 ? 'none' : 'inline-block'}"
+      @click="$emit('delete-step', stepData)"
+    ></i>
   </div>
 </template>
 <script>
+
 export default {
   props: {
     n: {
       type: Number,
       default: 1
+    },
+    length: {
+      type: Number,
+      default: 1
+    },
+    stepData:{
+      type: Object,
+      default:() => ({})
+    }
+  },
+  data(){
+    return {
+      step: Object.assign(this.stepData)
+    }
+  },
+  watch:{
+    step(){
+      this.$emit('change-step', this.stepData, this.step);
     }
   }
 }

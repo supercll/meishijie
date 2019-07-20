@@ -3,15 +3,21 @@
     <h2>欢迎发布新菜谱，先介绍一下你的大作！</h2>
     <section class="create-introduce">
       <h5>标题</h5>
-      <el-input class="create-input" placeholder="请输入内容"></el-input>
-      <h5>自媒体标题</h5>
-      <el-input class="create-input" placeholder="请输入内容"></el-input>
+      <el-input class="create-input" placeholder="请输入内容" v-model="title"></el-input>
+      <h5>一段推荐语言</h5>
+      <el-input 
+        class="create-input" 
+        placeholder="请输入一段推荐语言" 
+        type="textarea"
+        :rows="8"
+        v-model="recommend"
+      ></el-input>
       <h5>属性</h5>
       <div>
         <el-select 
           :placeholder="$options.properties_placeholder[item.title]" 
           v-model="selectProperties[item.title]" 
-          v-for="item in properties" 
+          v-for="item in properties"
           :key="item.parent_type"
         >
           <el-option
@@ -56,8 +62,12 @@
     <section class="create-introduce">
       <Upload 
         v-for="(item,index) in steps" 
-        :key="index"
+        :key="item.inter_id"
         :n="index+1"
+        :step-data="item"
+        :length="steps.length"
+        @change-step="changeStep"
+        @delete-step="deleteStep"
       ></Upload>
       <el-button 
         class="eaeaea add-step-button" 
@@ -71,6 +81,7 @@
         class="introduce-text"
         type="textarea"
         :rows="8"
+        v-model="skill"
         placeholder="分享下你做这道菜的过程中的心得和小技巧吧！">
       </el-input>
     </section>
@@ -94,14 +105,18 @@ export default {
   properties_placeholder,
   data(){
     return {
-      value: '',
-      properties: [],
-      selectProperties: {},
+      title: '',  // 标题
+      recommend: '', // 推荐语
+      properties: [],  // 属性
+      selectProperties: {}, // 选择的属性
       material: {
         main_material:[],  // 主料
         accessories_material: [] // 辅料
       },
-      steps: Array(3).fill(1).map(item => Object.assign(step_struct))
+      // 步骤
+      steps: Array(3).fill(1).map(item => Object.assign({inter_id: Math.random()}, step_struct)),
+      // 小技巧
+      skill: ''
     }
   },
   async mounted(){
@@ -122,7 +137,21 @@ export default {
     },
     // 增加步骤
     addStep(){
-      this.steps.push(Object.assign(step_struct));
+      this.steps.push(Object.assign({inter_id: Math.random()}, step_struct));
+    },
+    // 改变步骤数据
+    changeStep(oldData, newData){
+      let index = this.steps.findIndex(item => item === oldData);
+      if(index !== -1){
+        this.steps.splice(index, 1, newData);
+      }
+    },
+    // 删除步骤
+    deleteStep(oldData){
+      let index = this.steps.findIndex(item => item === oldData);
+      if(index !== -1){
+        this.steps.splice(index, 1);
+      }
     }
   }
 }
