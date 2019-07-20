@@ -4,14 +4,6 @@
     <section class="create-introduce">
       <h5>标题</h5>
       <el-input class="create-input" placeholder="请输入内容" v-model="title"></el-input>
-      <h5>一段推荐语言</h5>
-      <el-input 
-        class="create-input" 
-        placeholder="请输入一段推荐语言" 
-        type="textarea"
-        :rows="8"
-        v-model="recommend"
-      ></el-input>
       <h5>属性</h5>
       <div>
         <el-select 
@@ -98,7 +90,26 @@ const properties_placeholder = { "craft": "请选择工艺", "flavor": "请选�
 const step_struct = {
   img_url: '',
   describe: '',
-} 
+}
+// 向后端发送的数据
+const backData = {
+  title: '',  // 标题
+  product_pic_url: '', // 成品图URL
+  product_story: '', // 成品图故事
+  property: {
+    craft: 0,  // 工艺 enum: [1,2,3,4],
+    flavor: 0,  // 口味  enum: [1,2,3,4],
+    hard: 0,   // 难度 enum: [1,2,3,4],
+    pepole: 0  // pepole 人数: [1,2,3,4],
+  },  // 属性
+  raw_material: {
+    main_material: [{name: '',specs: ''}],
+    accessories_material: [{name: '',specs: ''}],
+  },
+  steps: [{img_url: '',describe: '',}],
+  classify: '',
+  parent_classify: '',
+}
 export default {
   name: 'create',
   components: {Stuff,Upload},
@@ -106,7 +117,8 @@ export default {
   data(){
     return {
       title: '',  // 标题
-      recommend: '', // 推荐语
+      product_pic_url: '', // 成品图URL
+      product_story: '', // 成品图故事
       properties: [],  // 属性
       selectProperties: {}, // 选择的属性
       material: {
