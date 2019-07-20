@@ -109,6 +109,7 @@
 import Stuff from './stuff'
 import Upload from './upload'
 import {omit} from 'lodash'
+import createMockMenuPublishData from '@/mock/publish'
 
 import {getProperty, getClassify, publish} from '@/service/api'
 const properties_placeholder = { "craft": "请选择工艺", "flavor": "请选择口味", "hard": "请选择难度", "people": "请选择人数" };
@@ -233,7 +234,9 @@ export default {
     },
     async send(){
       this.loading_icon = 'el-icon-loading';
-      await publish(this.composeData())
+      // await publish(this.composeData())
+      // mock
+      await publish(createMockMenuPublishData().menus);
     }
   }
 }
