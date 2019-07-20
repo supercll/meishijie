@@ -22,18 +22,18 @@
       </div>
       <h5>菜谱分类</h5>
       <div>
-        <el-select 
-          :placeholder="请选择菜谱分类" 
-          v-model="selectProperties[item.title]" 
-          v-for="item in properties"
-          :key="item.parent_type"
-        >
-          <el-option
-            v-for="option in item.list"
-            :key="option.type"
-            :label="option.name"
-            :value="option.type">
-          </el-option>
+        <el-select v-model="classify_value" placeholder="请选择菜谱分类">
+          <el-option-group
+            v-for="group in classify"
+            :key="group.parent_type"
+            :label="group.parent_name">
+            <el-option
+              v-for="item in group.list"
+              :key="item.type"
+              :label="item.name"
+              :value="item.type">
+            </el-option>
+          </el-option-group>
         </el-select>
       </div>
       <h5>成品图 (328*440)</h5>
@@ -45,6 +45,7 @@
           class="introduce-text"
           type="textarea"
           :rows="10"
+          v-model="product_story"
           placeholder="请输入内容">
         </el-input>
       </div>
@@ -55,13 +56,13 @@
       <h5>主料</h5>
       <Stuff 
         type="main" 
-        :material="material.main_material"
+        :material="raw_material.main_material"
         @change-material="(data) => changeMaterial('main',data)"
       ></Stuff>
       <h5>辅料</h5>
       <Stuff 
         type="accessories" 
-        :material="material.accessories_material"
+        :material="raw_material.accessories_material"
         @change-material="(data) => changeMaterial('accessories', data)"
       ></Stuff>
     </section>
@@ -94,14 +95,22 @@
       </el-input>
     </section>
 
-    <el-button class="send" type="primary" size="medium" icon="el-icon-loading">搞定，提交审核</el-button>
+    <el-button 
+      class="send" 
+      type="primary" 
+      size="medium" 
+      :icon="loading_icon" 
+      @click="send"
+    >搞定，提交审核</el-button>
 
   </div>
 </template>
 <script>
 import Stuff from './stuff'
 import Upload from './upload'
-import {getProperty} from '@/service/api'
+import {omit} from 'lodash'
+
+import {getProperty, getClassify, publish} from '@/service/api'
 const properties_placeholder = { "craft": "请选择工艺", "flavor": "请选择口味", "hard": "请选择难度", "people": "请选择人数" };
 const step_struct = {
   img_url: '',
@@ -118,13 +127,13 @@ const backData = {
     hard: 0,   // 难度 enum: [1,2,3,4],
     pepole: 0  // pepole 人数: [1,2,3,4],
   },  // 属性
-  raw_material: {
-    main_material: [{name: '',specs: ''}],
-    accessories_material: [{name: '',specs: ''}],
+  raw_material: { // 料
+    main_material: [{name: '',specs: ''}], // 主料
+    accessories_material: [{name: '',specs: ''}], // 辅料
   },
-  steps: [{img_url: '',describe: '',}],
-  classify: '',
-  parent_classify: '',
+  steps: [{img_url: '',describe: '',}], // 步骤
+  classify: '', // 菜谱分类
+  skill: '',
 }
 export default {
   name: 'create',
@@ -137,30 +146,47 @@ export default {
       product_story: '', // 成品图故事
       properties: [],  // 属性
       selectProperties: {}, // 选择的属性
-      material: {
+      raw_material: {
         main_material:[],  // 主料
         accessories_material: [] // 辅料
       },
       // 步骤
       steps: Array(3).fill(1).map(item => Object.assign({inter_id: Math.random()}, step_struct)),
       // 小技巧
-      skill: ''
+      skill: '',
+      classify: [],
+      classify_value: '',
+      loading_icon: ''
     }
   },
-  async mounted(){
-    this.properties = (await getProperty()).data;
-    this.properties.forEach(item => {
-      this.$set(this.selectProperties, item.title, '');
+  mounted(){
+    //属性分类
+    getProperty().then((data) => {
+      this.properties = data.data;
+      this.properties.forEach(item => {
+        this.$set(this.selectProperties, item.title, '');
+      })
     })
+
+    // 菜谱分类
+    getClassify().then((data) => {
+      this.classify = data.data;
+      this.classify.forEach(item => {
+        //this.$set(this.selectProperties, item.title, '');
+      })
+      console.log(this.classify)
+    })
+
+    
   },
   methods:{
     // 主料，辅料 变化时
     changeMaterial(type, data){
       if(type === 'main') {
-        this.material.main_material = data;
+        this.raw_material.main_material = data;
       }
       if(type === 'accessories') {
-        this.material.accessories_material = data;
+        this.raw_material.accessories_material = data;
       }
     },
     // 增加步骤
@@ -180,6 +206,34 @@ export default {
       if(index !== -1){
         this.steps.splice(index, 1);
       }
+    },
+    composeData(){
+      return  {
+        title: this.title,  // 标题
+        product_pic_url: '', // 成品图URL
+        product_story: this.product_story, // 成品图故事
+        property: {
+          // craft: this.selectProperties.craft,  // 工艺 enum: [1,2,3,4],
+          // flavor: 0,  // 口味  enum: [1,2,3,4],
+          // hard: 0,   // 难度 enum: [1,2,3,4],
+          // pepole: 0  // pepole 人数: [1,2,3,4],
+          ...this.selectProperties
+        },  // 属性
+        raw_material: { // 料
+          ...this.raw_material
+          // main_material: [{name: '',specs: ''}], // 主料
+          // accessories_material: [{name: '',specs: ''}], // 辅料
+        },
+        steps: [...this.steps.map((item) => {
+          return omit(item, ['inter_id']);
+        })], // 步骤
+        classify: this.classify_value, // 菜谱分类
+        skill: this.skill
+      }
+    },
+    async send(){
+      this.loading_icon = 'el-icon-loading';
+      await publish(this.composeData())
     }
   }
 }
