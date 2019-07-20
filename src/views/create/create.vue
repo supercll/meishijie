@@ -20,6 +20,22 @@
           </el-option>
         </el-select>
       </div>
+      <h5>菜谱分类</h5>
+      <div>
+        <el-select 
+          :placeholder="请选择菜谱分类" 
+          v-model="selectProperties[item.title]" 
+          v-for="item in properties"
+          :key="item.parent_type"
+        >
+          <el-option
+            v-for="option in item.list"
+            :key="option.type"
+            :label="option.name"
+            :value="option.type">
+          </el-option>
+        </el-select>
+      </div>
       <h5>成品图 (328*440)</h5>
       <div class="upload-img-box clearfix">
         <div class="upload-img">
