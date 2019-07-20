@@ -1,20 +1,22 @@
 <template>
   <div class="recipe">
     <!-- v-model="activeName" -->
-    <el-tabs  type="border-card" @tab-click="handleClick">
-      <el-tab-pane label="家常菜谱">
-        <h3>家常菜谱</h3>
+    <el-tabs v-model="parent_type" type="border-card" @tab-click="handleClick">
+
+      <el-tab-pane 
+        :label="item.parent_name" 
+        v-for="item in classify" 
+        :key="item.parent_type"
+      >
+        <h3>{{item.parent_name}}</h3>
         <div class="recipe-link">
-          <a href="" class="active">家常菜</a>
-          <a href="">家常菜</a>
-          <a href="">家常菜</a>
-          <a href="">家常菜</a>
-          <a href="">家常菜</a>
+          <router-link 
+            :to="{name: 'recipe', query: {classify_type: list.type}}" 
+            v-for="list in item.list" :key="list.type"
+            :class="{active: classify_type === list.type}"
+          >{{list.name}}</router-link>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-      <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-      <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
     </el-tabs>
     <h2>家常好味道，给你家一般的温暖</h2>
     <el-container>
@@ -52,6 +54,29 @@
 import MenuCard from '@/components/menu-card.vue'
 export default {
   components: {MenuCard},
+  data(){
+    return {
+      parent_type: '',
+      classify_type: ''
+    }
+  },
+  computed: {
+    classify(){
+      return this.$store.state.classify;
+    }
+  },
+  watch: {
+    $route: {
+      handler(){
+        const {query} = this.$route;
+        if(query.classify_type) {
+          this.classify_type = query.classify_type;
+          this.parent_type = String(query.classify_type[0] - 1);
+        }
+      },
+      immediate: true
+    }
+  },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
