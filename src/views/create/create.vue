@@ -4,11 +4,21 @@
     <section class="create-introduce">
       <h5>标题</h5>
       <el-input class="create-input" placeholder="请输入内容"></el-input>
-      <h5>自媒体标题</h5>
-      <el-input class="create-input" placeholder="请输入内容"></el-input>
       <h5>属性</h5>
       <div>
         <el-select v-model="value" placeholder="请选择" v-for="n in 3"
+            :key="n">
+          <el-option
+            v-for="item in 10"
+            :key="item"
+            :label="item"
+            :value="item">
+          </el-option>
+        </el-select>
+      </div>
+      <h5>菜谱分类</h5>
+      <div>
+        <el-select v-model="value" placeholder="请选择菜谱分类" v-for="n in 3"
             :key="n">
           <el-option
             v-for="item in 10"
