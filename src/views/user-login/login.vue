@@ -21,6 +21,7 @@
 </template>
 <script>
 import {login} from '@/service/api'
+import { setTimeout } from 'timers';
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -50,11 +51,28 @@ export default {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           let loginData = await login(this.ruleForm);
-          localStorage.setItem('token', loginData.token);
-          this.$message({
-            message: '登录成功',
-            type: 'success'
-          });
+          if(loginData.code !== 0) {
+            this.$message({
+              message: '用户或密码输入错误，请重新输入',
+              type: 'error'
+            });
+            return;
+          }
+
+          if(loginData.code === 0){
+            localStorage.setItem('token', loginData.token);
+            this.$message({
+              message: '登录成功',
+              type: 'success'
+            });
+            this.$router.push({
+              name: 'home'
+            })
+            this.$store.commit('changeLogin', true);
+          }
+
+          
+          
         } else {
           console.log('error submit!!');
           return false;

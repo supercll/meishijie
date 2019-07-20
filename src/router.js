@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+Vue.use(Router)
+
 import Home from './views/home/Home.vue'
 
 const Recipe = () => import( '@/views/recipe-daquan/recipe' );
@@ -24,7 +27,10 @@ const viewsRoute = [
     path: '/create',
     name: 'create',
     title: '发布菜谱',
-    component: Create
+    component: Create,
+    meta: {
+      login: true
+    }
   },
   {
     path: '/space',
@@ -33,6 +39,9 @@ const viewsRoute = [
     component: Space,
     redirect: {
       name: 'works'
+    },
+    meta: {
+      login: true
     },
     children: [
       {
@@ -69,9 +78,9 @@ const viewsRoute = [
   }
 ]
 
-Vue.use(Router)
 
-export default new Router({
+
+const router = new Router({
   mode: 'history',
   //base: process.env.BASE_URL,
   routes: [
@@ -88,3 +97,23 @@ export default new Router({
     ...viewsRoute
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some((o) => o.meta.login) || to.name === 'login'){
+    const token = localStorage.getItem('token');
+    if(token && to.name === 'login') {
+      next({name: 'home'})
+    }else if(token && to.name !== 'login'){
+      next()
+    }else if(!token && to.name === 'login'){
+      next();
+    }else {
+      next({name: 'login'});
+    }
+    return;
+  }
+  next();
+})
+
+
+export default router;

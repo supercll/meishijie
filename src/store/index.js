@@ -6,11 +6,15 @@ import {getClassify} from '@/service/api'
 
 let store = new Vuex.Store({
   state:{
-    classify: []
+    classify: [],
+    isLogin: !!localStorage.getItem('token') // 是否登录
   },
   mutations: {
     changeClassify(state, data){
       state.classify = data;
+    },
+    changeLogin(state, status){
+      state.isLogin = status;
     }
   },
   actions: {

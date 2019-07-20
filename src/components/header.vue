@@ -14,12 +14,17 @@
             >
             </el-input>
           </el-col>
-          <el-col :span="6" :offset="3" class="avatar-box">
+          <el-col :span="6" :offset="3" class="avatar-box" v-if="isLogin">
             <router-link :to="{name: 'space'}">
               <el-avatar style="vertical-align: middle;" shape="square" size="medium" :src="avatarDefaultUrl"></el-avatar>
             </router-link>
             <router-link :to="{name: 'space'}" class="user-name">辣手摧花</router-link>
             <router-link :to="{name: 'create'}" class="collection">发布菜谱</router-link>
+            <a href="javascript:;" class="collection">退出</a>
+          </el-col>
+          <el-col :span="6" :offset="3" class="avatar-box" v-if="!isLogin">
+            <router-link :to="{name: 'login'}" class="user-name">登录</router-link>
+            <router-link :to="{name: 'login'}" class="collection">注册</router-link>
           </el-col>
         </el-row>
       </div>
@@ -42,6 +47,11 @@ export default {
   },
   components: {
     Menus
+  },
+  computed: {
+    isLogin(){
+      return this.$store.state.isLogin
+    }
   }
 }
 </script>
