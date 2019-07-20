@@ -1,15 +1,16 @@
 <template>
   <div class="login-section">
+    <!-- :rules="rules" -->
     <el-form 
       label-position="top"
       :model="ruleForm" status-icon 
-      :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"
+       ref="ruleForm" label-width="100px" class="demo-ruleForm"
     >
       <el-form-item label="用户名" prop="name">
-        <el-input type="password" v-model="ruleForm.name" autocomplete="off"></el-input>
+        <el-input type="text" v-model="ruleForm.name" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="checkPass">
-        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+      <el-form-item label="密码" prop="password">
+        <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -19,6 +20,7 @@
   </div>
 </template>
 <script>
+import {login} from '@/service/api'
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -45,9 +47,14 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          alert('submit!');
+          let loginData = await login(this.ruleForm);
+          localStorage.setItem('token', loginData.token);
+          this.$message({
+            message: '登录成功',
+            type: 'success'
+          });
         } else {
           console.log('error submit!!');
           return false;
