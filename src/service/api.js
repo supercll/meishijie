@@ -30,3 +30,8 @@ export async function login(params){
   let data = await axios.post('/api/user/login', params);
   return data.data;
 }
+// 用户信息
+export async function userInfo(params){
+  let data = await axios.post('/api/user/info', params);
+  return data.data;
+}

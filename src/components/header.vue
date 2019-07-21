@@ -20,7 +20,7 @@
             </router-link>
             <router-link :to="{name: 'space'}" class="user-name">辣手摧花</router-link>
             <router-link :to="{name: 'create'}" class="collection">发布菜谱</router-link>
-            <a href="javascript:;" class="collection">退出</a>
+            <a href="javascript:;" class="collection" @click="loginOut">退出</a>
           </el-col>
           <el-col :span="6" :offset="3" class="avatar-box" v-if="!isLogin">
             <router-link :to="{name: 'login'}" class="user-name">登录</router-link>
@@ -51,6 +51,25 @@ export default {
   computed: {
     isLogin(){
       return this.$store.state.isLogin
+    }
+  },
+  methods: {
+    loginOut(){
+      this.$confirm('确定要退出吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '退出成功!'
+          });
+          localStorage.removeItem('token');
+          this.$store.commit('changeLogin', false);
+          this.$router.push({
+            name: 'home'
+          })
+        });
     }
   }
 }

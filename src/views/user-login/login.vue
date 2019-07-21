@@ -60,7 +60,7 @@ export default {
           }
 
           if(loginData.code === 0){
-            localStorage.setItem('token', loginData.token);
+            localStorage.setItem('token', loginData.data.token);
             this.$message({
               message: '登录成功',
               type: 'success'
@@ -68,6 +68,8 @@ export default {
             this.$router.push({
               name: 'home'
             })
+
+            this.$store.commit('changeLoginAfterInfo', loginData.data);
             this.$store.commit('changeLogin', true);
           }
 

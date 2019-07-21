@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import Store from '@/store'
 Vue.use(Router)
 
 import Home from './views/home/Home.vue'
@@ -97,10 +97,11 @@ const router = new Router({
     ...viewsRoute
   ]
 })
-
+console.log(Store)
 router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
+  Store.commit('changeLogin', !!token);
   if(to.matched.some((o) => o.meta.login) || to.name === 'login'){
-    const token = localStorage.getItem('token');
     if(token && to.name === 'login') {
       next({name: 'home'})
     }else if(token && to.name !== 'login'){
