@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Store from '@/store'
+import { Message } from 'element-ui';
 Vue.use(Router)
 
 import Home from './views/home/Home.vue'
@@ -97,14 +98,24 @@ const router = new Router({
     ...viewsRoute
   ]
 })
-console.log(Store)
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const token = localStorage.getItem('token');
   Store.commit('changeLogin', !!token);
   if(to.matched.some((o) => o.meta.login) || to.name === 'login'){
     if(token && to.name === 'login') {
       next({name: 'home'})
     }else if(token && to.name !== 'login'){
+      // 是否还处在登录状态
+      let data = await Store.dispatch('userInfoAction');
+      if(data.error === 401){
+        Message.warning({
+          message: data.mes,
+          type: 'warning'
+        });
+        Store.commit('changeLogin', false);
+        next({name: 'login'});
+        return;
+      }
       next()
     }else if(!token && to.name === 'login'){
       next();

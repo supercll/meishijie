@@ -58,7 +58,6 @@ export default {
   },
   async mounted(){
     let data = await this.$store.dispatch('userInfoAction');
-    console.log(111111111, data, this.isLogin)
     if(data.error === 401 && this.isLogin){
       this.$message({
         message: data.mes,
