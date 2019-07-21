@@ -16,9 +16,9 @@
           </el-col>
           <el-col :span="6" :offset="3" class="avatar-box" v-if="isLogin">
             <router-link :to="{name: 'space'}">
-              <el-avatar style="vertical-align: middle;" shape="square" size="medium" :src="avatarDefaultUrl"></el-avatar>
+              <el-avatar style="vertical-align: middle;" shape="square" size="medium" :src="userInfo.avatar"></el-avatar>
             </router-link>
-            <router-link :to="{name: 'space'}" class="user-name">辣手摧花</router-link>
+            <router-link :to="{name: 'space'}" class="user-name">{{userInfo.name}}</router-link>
             <router-link :to="{name: 'create'}" class="collection">发布菜谱</router-link>
             <a href="javascript:;" class="collection" @click="loginOut">退出</a>
           </el-col>
@@ -51,6 +51,20 @@ export default {
   computed: {
     isLogin(){
       return this.$store.state.isLogin
+    },
+    userInfo(){
+      return this.$store.state.userInfo
+    }
+  },
+  async mounted(){
+    let data = await this.$store.dispatch('userInfoAction');
+    console.log(111111111, data, this.isLogin)
+    if(data.error === 401 && this.isLogin){
+      this.$message({
+        message: data.mes,
+        type: 'warning'
+      });
+      this.$store.commit('changeLogin', false);
     }
   },
   methods: {

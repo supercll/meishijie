@@ -31,9 +31,14 @@ let store = new Vuex.Store({
       commit('changeClassify', data);
     },
     async userInfoAction({commit, state}){
-      console.log({userId: state.loginAfterInfo._id})
-      let data = (await userInfo({userId: state.loginAfterInfo._id})).data;
-      commit('changeUserInfo', data);
+      let data = (await userInfo());
+      if(data.code !== 0){
+        // commit('changeLogin', false);
+        localStorage.removeItem('token');
+        return data;
+      }
+      commit('changeUserInfo', data.data);
+      return data;
     }
   }
 })

@@ -1,7 +1,17 @@
 import axios from 'axios';
 
-
-
+axios.interceptors.request.use(
+  config => {
+    let token = localStorage.getItem('token');
+    if (token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+      config.headers.authorization = `token ${token}`;
+    }
+    return config;
+  },
+  err => {
+    return Promise.reject(err);
+  }
+);
 
 // 获取所有属性分类
 export async function getProperty(){
