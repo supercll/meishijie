@@ -12,7 +12,12 @@
           |
           <a href="">编辑个人资料</a>
         </span>
+        <div class="tools">
+				  <a href="###" uid="13883823" class="follow-at"> +关注 </a>			
+				  <a href="###" uid="13883823" class="no-follow-at"> 已关注 </a>			
+        </div>
       </div>
+
       <ul class="user-more-info">
         <li>
           <a href="">
@@ -110,6 +115,7 @@ export default {
     .user-main
       width 570px
       padding 20px
+      position relative
       h1
         font-size 24px
         color #333
@@ -120,6 +126,22 @@ export default {
         color #999
         a
           color #999
+      .tools 
+        position absolute
+        right 20px
+        top 20px
+        vertical-align top;
+        a
+          display inline-block
+          padding 3px 0
+          width 50px
+          color #fff
+          text-align center
+        a.follow-at
+          background-color  #ff3232
+        a.no-follow-at 
+          background-color #999
+          
     .user-more-info
       width 190px
       overflow hidden
@@ -186,6 +208,5 @@ export default {
     background-color: #ff3232;
   .el-tabs__nav-wrap::after
     background-color: transparent;
-  
 </style>
 
