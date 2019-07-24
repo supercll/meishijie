@@ -114,6 +114,7 @@ export default {
     .user-main
       width 570px
       padding 20px
+      position relative
       h1
         font-size 24px
         color #333
