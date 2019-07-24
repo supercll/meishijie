@@ -112,6 +112,7 @@ import {omit} from 'lodash'
 import createMockMenuPublishData from '@/mock/publish'
 
 import {getProperty, getClassify, publish} from '@/service/api'
+import { userInfo } from 'os';
 const properties_placeholder = { "craft": "请选择工艺", "flavor": "请选择口味", "hard": "请选择难度", "people": "请选择人数" };
 const step_struct = {
   img_url: '',
@@ -180,6 +181,11 @@ export default {
 
     
   },
+  computed:{
+    userInfo(){
+      return this.$store.state.userInfo
+    }
+  },
   methods:{
     // 主料，辅料 变化时
     changeMaterial(type, data){
@@ -236,7 +242,19 @@ export default {
       this.loading_icon = 'el-icon-loading';
       // await publish(this.composeData())
       // mock
-      await publish(createMockMenuPublishData().menus);
+      let menu = createMockMenuPublishData().menus;
+      menu.userId = this.userInfo._id;
+      
+      let data = (await publish(menu));
+      if(data.code === 0){
+        this.$message({
+          message: '发布成功',
+          type: 'success'
+        });
+        this.$router.push({
+          name: 'space'
+        })
+      }
     }
   }
 }
