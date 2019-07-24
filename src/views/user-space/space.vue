@@ -67,11 +67,25 @@
 <script>
 import MenuCard from '@/components/menu-card.vue'
 import Fans from './fans'
+import { userInfo } from 'os';
 export default {
   components: {MenuCard, Fans},
   data(){
     return {
       activeName: 'works'
+    }
+  },
+  mounted(){
+    
+    let {userId} = this.$route.query;
+    if(!userId){
+      userId = this.userInfo._id;
+    }
+    console.log(this.userInfo)
+  },
+  computed: {
+    userInfo(){
+      return this.$store.state.userInfo;
     }
   },
   watch: {

@@ -9,7 +9,7 @@ let store = new Vuex.Store({
     classify: [],
     userInfo: {},
     loginAfterInfo: {}, // 点击登录后，拿到一些信息，重要的是_id和token
-    isLogin: !!localStorage.getItem('token') // 是否登录
+    isLogin: false // 是否登录
   },
   mutations: {
     changeClassify(state, data){
@@ -31,6 +31,7 @@ let store = new Vuex.Store({
       commit('changeClassify', data);
     },
     async userInfoAction({commit, state}){
+      console.log(9999999)
       let data = (await userInfo());
       if(data.code !== 0){
         // commit('changeLogin', false);
@@ -46,6 +47,7 @@ let store = new Vuex.Store({
 store.watch((state) => {
   return state.isLogin
 }, (newValue, oldValue) => {
+  console.log(newValue)
   if(newValue){
     if(!store.state.userInfo.name){
       // 发送请求，那数据

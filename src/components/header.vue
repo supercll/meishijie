@@ -56,15 +56,8 @@ export default {
       return this.$store.state.userInfo
     }
   },
-  async mounted(){
-    let data = await this.$store.dispatch('userInfoAction');
-    if(data.error === 401 && this.isLogin){
-      this.$message({
-        message: data.mes,
-        type: 'warning'
-      });
-      this.$store.commit('changeLogin', false);
-    }
+  mounted(){
+   // this.getOwnInfo();
   },
   methods: {
     loginOut(){
@@ -83,6 +76,16 @@ export default {
             name: 'home'
           })
         });
+    },
+    async getOwnInfo(){
+      let data = await this.$store.dispatch('userInfoAction');
+      if(data.error === 401 && this.isLogin){
+        this.$message({
+          message: data.mes,
+          type: 'warning'
+        });
+        this.$store.commit('changeLogin', false);
+      }
     }
   }
 }
