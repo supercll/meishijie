@@ -9,7 +9,12 @@
         :key="item"
       >
         <div class="recipe-link">
-          <router-link to="" class="active">
+          <router-link 
+            to="" 
+            class="active" 
+            v-for="option in 4" 
+            :key="option"
+          >
             私房菜
           </router-link>
         </div>
