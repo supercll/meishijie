@@ -7,11 +7,12 @@ class HttpRequest {
     }
     this.defaults = Object.assign(this.defaults, options);
   }
+  setConfig(){
+
+  }
   interceptors(install){
-    // 拦截请求，给请求的数据或者头信息添加一些数据
     install.interceptors.request.use(
       config => {
-        
         let token = localStorage.getItem('token');
         if (token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
           config.headers.authorization = `token ${token}`;
@@ -22,7 +23,6 @@ class HttpRequest {
         return Promise.reject(err);
       }
     );
-    // 拦截响应，给响应的数据添加一些数据
     install.interceptors.response.use(
       res => {
         const { data, status } = res;
@@ -35,7 +35,7 @@ class HttpRequest {
   }
   request(options){
     options = Object.assign(this.defaults, options)
-    const instance = axios.create(options); // 请求的子实例
+    const instance = axios.create(options)
     this.interceptors(instance);
     return instance
   }
@@ -45,20 +45,20 @@ const request = new HttpRequest({
   baseURL: '/api'
 });
 
-const http = request.request(); // 请求的实例，axios的实例
+const http = request.request();
 
 // 获取banner数据
-export function getBanner(){
-  return http.get('/banner');
+export async function getBanner(){
+  return await http.get('/banner');
 }
 
 // 获取所有属性分类
-export function getProperty(){
-  return http.get('/menu/property');
+export async function getProperty(){
+  return await http.get('/menu/property');
 }
 // 获取所有菜谱分类
-export function getClassify(){
-  return http.get('/menu/classify');
+export async function getClassify(){
+  return await http.get('/menu/classify');
 }
 
 /**
@@ -67,8 +67,8 @@ export function getClassify(){
  * @param {Object} params - 参考mock的数据
  * @returns
  */
-export function publish(params){
-  return http.post('/menu/publish', params);
+export async function publish(params){
+  return await http.post('/menu/publish', params);
 }
 
 /**
@@ -79,8 +79,8 @@ export function publish(params){
  * @param {Object} params.password - 密码
  * @returns
  */
-export function register(params){
-  return http.post('/user/create', params);
+export async function register(params){
+  return await http.post('/user/create', params);
 }
 
 /**
@@ -91,8 +91,15 @@ export function register(params){
  * @param {string} params.password - 密码
  * @returns
  */
-export function login(params){
-  return http.post('/user/login', params);
+export async function login(params){
+  return await http.post('/user/login', params);
+}
+
+/**
+ * 账号登出
+ */
+export async function login_out(){
+  return await http.post('/user/login_out');
 }
 
 /**
@@ -102,8 +109,8 @@ export function login(params){
  * @param {string} params.userId - 用户id
  * @returns
  */
-export function userInfo(params){
-  return http.post('/user/info', params);
+export async function userInfo(params){
+  return await http.post('/user/info', params);
 }
 
 /**
@@ -113,11 +120,15 @@ export function userInfo(params){
  * @param {string} [params.userId] - 指定用户的菜单
  * @param {string} [params.classify] - 按照菜单分类，进行筛选
  * @param {string} [params.property] - 指定菜单属性进行筛选
+ * @param {string} [params.property.craft] - 按工艺筛选
+ * @param {string} [params.property.flavor] - 按口味筛选
+ * @param {string} [params.property.hard] - 按难度筛选
+ * @param {string} [params.property.people] - 按人数筛选
  * @param {string} [params.page] - 指定页码
  * @returns
  */
-export function getMenus(params){
-  return http.get('/menu/query', {params});
+export async function getMenus(params){
+  return await http.get('/menu/query', {params});
 }
 
 /**
@@ -127,8 +138,8 @@ export function getMenus(params){
  * @param {string} [params.menuId] - 指定菜单的id
  * @returns
  */
-export function menuInfo(params){
-  return http.get('/menu/menuInfo', {params});
+export async function menuInfo(params){
+  return await http.get('/menu/menuInfo', {params});
 }
 
 /**
@@ -138,8 +149,8 @@ export function menuInfo(params){
  * @param {string} [params.menuId] - 指定要收藏的菜单的id
  * @returns
  */
-export function toggleCollection(params){
-  return http.post('/user/collection', params);
+export async function toggleCollection(params){
+  return await http.post('/user/collection', params);
 }
 /**
  * toggle 关注。关注的取消关注；没关注的，要关注。
@@ -148,8 +159,8 @@ export function toggleCollection(params){
  * @param {string} [params.followUserId] - 指定要关注的用户的id
  * @returns
  */
-export function toggleFollowing(params){
-  return http.post('/user/following', params);
+export async function toggleFollowing(params){
+  return await http.post('/user/following', params);
 }
 
 /**
@@ -159,8 +170,8 @@ export function toggleFollowing(params){
  * @param {string} [params.userId] - 指定的用户id
  * @returns
  */
-export function collection(params){
-  return http.get('/user/collection', {params});
+export async function collection(params){
+  return await http.get('/user/collection', {params});
 }
 
 /**
@@ -170,8 +181,8 @@ export function collection(params){
  * @param {string} [params.userId] - 指定的用户id
  * @returns
  */
-export function following(params){
-  return http.get('/user/following', {params});
+export async function following(params){
+  return await http.get('/user/following', {params});
 }
 
 /**
@@ -181,6 +192,30 @@ export function following(params){
  * @param {string} [params.userId] - 指定的用户id
  * @returns
  */
-export function fans(params){
-  return http.get('/user/fans', {params});
+export async function fans(params){
+  return await http.get('/user/fans', {params});
+}
+
+/**
+ * 上传图片
+ * @export
+ * @param {Object} [params] - 
+ * @param {string} [params.type] - product user step
+ * @returns
+ */
+export async function upload(params){
+  return await http.post('/user/fans', {params});
+}
+
+/**
+ * 修改用户信息
+ * @export
+ * @param {Object} [params] - 
+ * @param {string} [params.name] - product user step
+ * @param {string} [params.avatar] - product user step
+ * @param {string} [params.sign] - product user step
+ * @returns
+ */
+export async function userEdit(params){
+  return await http.post('/user/edit', params);
 }
