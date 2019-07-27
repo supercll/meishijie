@@ -45,3 +45,8 @@ export async function userInfo(params){
   let data = await axios.post('/api/user/info', params);
   return data.data;
 }
+// 拿到用户发布的菜谱
+export async function getMenus(params){
+  let data = await axios.get('/api/menu/query', {params: params});
+  return data.data;
+}

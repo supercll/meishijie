@@ -5,6 +5,7 @@ import { Message } from 'element-ui';
 Vue.use(Router)
 
 import Home from './views/home/Home.vue'
+// import MenuList from '@/views/user-space/menu-list'
 
 const Recipe = () => import( '@/views/recipe-daquan/recipe' );
 const Create = () => import( '@/views/create/create' );

@@ -3,18 +3,18 @@
     <h2>欢迎来到我的美食空间</h2>
     <div class="user-info">
       <div class="user-avatar">
-        <img src="https://s1.c.meishij.net/images/default/tx2_3.png" alt="">
+        <img :src="userInfo.avatar" alt="">
       </div>
       <div class="user-main">
-        <h1>辣手摧js</h1>
+        <h1>{{userInfo.name}}</h1>
         <span class="info">
-          <em>2019-06-15加入美食杰</em>
+          <em>{{userInfo.createdAt}}加入美食杰</em>
           |
           <a href="">编辑个人资料</a>
         </span>
-        <div class="tools">
-				  <a href="###" uid="13883823" class="follow-at"> +关注 </a>			
-				  <a href="###" uid="13883823" class="no-follow-at"> 已关注 </a>			
+        <div class="tools" v-if="!isOwner">
+				  <a href="###" class="follow-at"> +关注 </a>			
+				  <a href="###" class="no-follow-at"> 已关注 </a>			
         </div>
       </div>
 
@@ -22,25 +22,25 @@
         <li>
           <a href="">
             <span>关注</span>
-            <strong>1</strong>
+            <strong>{{userInfo.following_len}}</strong>
           </a>
         </li>
         <li>
           <a href="">
             <span>粉丝</span>
-            <strong>1</strong>
+            <strong>{{userInfo.follows_len}}</strong>
           </a>
         </li>
         <li>
           <a href="">
             <span>收藏</span>
-            <strong>1</strong>
+            <strong>{{userInfo.collections_len}}</strong>
           </a>
         </li>
         <li>
           <a href="">
             <span>发布菜谱</span>
-            <strong>1</strong>
+            <strong>{{userInfo.work_menus_len}}</strong>
           </a>
         </li>
       </ul>
@@ -59,7 +59,7 @@
       <!-- <menu-card :margin-left="13"></menu-card> -->
       <!-- 粉丝 & 关注 布局 -->
       <!-- <Fans></Fans> -->
-      <router-view></router-view>
+      <router-view :info="info"></router-view>
     </div>
 
   </div>
@@ -67,26 +67,50 @@
 <script>
 import MenuCard from '@/components/menu-card.vue'
 import Fans from './fans'
-import { userInfo } from 'os';
+import { userInfo, getMenus } from '@/service/api'
 export default {
   components: {MenuCard, Fans},
   data(){
     return {
-      activeName: 'works'
+      activeName: 'works',
+      isOwner: true,  // 是否是自己
+      currentUserId: '',
+      userInfo: {
+        avatar: "",
+        collections_len: 0,
+        createdAt: "",
+        following_len: 0,
+        follows_len: 0,
+        name: "",
+        work_menus_len: 0,
+      },
+      info:[],
+      menuList: []
     }
   },
-  mounted(){
+  async mounted(){
     
     let {userId} = this.$route.query;
+    
+    this.userInfo = this.$store.state.userInfo;
     if(!userId){
       userId = this.userInfo._id;
     }
-    console.log(this.userInfo)
+    this.isOwner = userId === this.userInfo._id; // 是否是自己
+    this.currentUserId = userId;
+    // 如果不是自己，获取userInfo
+    if(!this.isOwner) {
+      let data = await userInfo({userId});
+      this.userInfo = data.data;
+    }
+   let menuList = await getMenus({userId});
+   console.log(menuList);
+   this.info = menuList.data;
   },
   computed: {
-    userInfo(){
-      return this.$store.state.userInfo;
-    }
+    // userInfo(){
+    //   return this.$store.state.userInfo;
+    // }
   },
   watch: {
     $route: {
@@ -96,13 +120,16 @@ export default {
         }
       },
       immediate: true
-    }
+    },
   },
   methods: {
     handleClick(tab, event) {
       const {name} = tab;
       this.$router.push({
-        name: name
+        name: name,
+        query: {
+          ...this.$route.query
+        }
       })
     }
   }
