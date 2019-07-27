@@ -47,6 +47,19 @@ export async function userInfo(params){
 }
 // 拿到用户发布的菜谱
 export async function getMenus(params){
-  let data = await axios.get('/api/menu/query', {params: params});
+  let data = await axios.get('/api/menu/query', {params});
   return data.data;
 }
+// toggle关注 {followUserId}
+export async function toggleFollowing(params){
+  let data = await axios.post('/api/user/following', params);
+  return data.data;
+}
+// 我的关注
+export async function following(params){
+  let data = await axios.get('/api/user/following', {params});
+  return data.data;
+}
+// 我的粉丝
+
+// 我的收藏

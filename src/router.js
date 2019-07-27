@@ -59,8 +59,8 @@ const viewsRoute = [
         component: Fans
       },
       {
-        path: 'follower',
-        name: 'follower',
+        path: 'following',
+        name: 'following',
         title: '我的关注',
         component: Fans
       },

@@ -8,12 +8,12 @@
 		</div>
 		
 		<ul class="fans clearfix">
-			<router-link :to="{name: 'space',query: {id: n}}" tag="li" v-for="n in 10" :key="n">
+			<router-link :to="{name: 'space',query: {userId: item._id}}" tag="li" v-for="item in info" :key="item._id">
 				<a href="javascript:;" class="img">
 				<img src="https://s1.st.meishij.net/user/154/01/t62904_152386836353255.jpg"></a>
 				<div class="c">
 					<strong class="name">
-						<router-link :to="{name: 'space',query: {id: n}}">林冰儿</router-link>
+						<router-link :to="{name: 'space',query: {userId: item._id}}">{{item.name}}</router-link>
 					</strong>
 					<em class="info"><span>粉丝：</span>33992　|　<span>关注：</span>4619　|　<span>发布：</span>782</em>
 					<em class="info"><span>简介：</span>爱好美食和旅游！</em>
@@ -25,6 +25,17 @@
 		</ul>
 	</div>
 </template>
+<script>
+export default {
+	props:{
+		info:{
+			type: Array,
+			default: () => []
+		}
+	}
+}
+</script>
+
 <style lang="stylus">
 .fans 
   font-size 12px

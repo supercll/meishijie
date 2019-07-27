@@ -13,8 +13,14 @@
           <a href="">编辑个人资料</a>
         </span>
         <div class="tools" v-if="!isOwner">
-				  <a href="###" class="follow-at"> +关注 </a>			
-				  <a href="###" class="no-follow-at"> 已关注 </a>			
+				  <a href="javascript:;" 
+            :class="{
+              'follow-at': !userInfo.isFollowing,
+              'no-follow-at': userInfo.isFollowing
+            }"
+            @click="follow"
+          > {{userInfo.isFollowing ? '已关注' : '+关注'}} </a>			
+				  <!-- <a href="javascript;" class="no-follow-at"> 已关注 </a>			 -->
         </div>
       </div>
 
@@ -49,8 +55,8 @@
     <!-- v-model="activeName" -->
     <el-tabs v-model="activeName" class="user-nav"  @tab-click="handleClick">
       <el-tab-pane label="作品" name="works"></el-tab-pane>
-      <el-tab-pane label="我的粉丝" name="fans"></el-tab-pane>
-      <el-tab-pane label="我的关注" name="follower"></el-tab-pane>
+      <el-tab-pane label="粉丝" name="fans"></el-tab-pane>
+      <el-tab-pane label="关注" name="following"></el-tab-pane>
       <el-tab-pane label="收藏" name="collection"></el-tab-pane>
     </el-tabs>
 
@@ -67,7 +73,17 @@
 <script>
 import MenuCard from '@/components/menu-card.vue'
 import Fans from './fans'
-import { userInfo, getMenus } from '@/service/api'
+import { userInfo, getMenus, toggleFollowing, following } from '@/service/api'
+
+const getOtherInfo = {
+  async works(params){  // 作品
+    return (await getMenus(params)).data;
+  },
+  async following(params){  // 关注
+    return (await following(params)).data;
+  }
+}
+
 export default {
   components: {MenuCard, Fans},
   data(){
@@ -83,29 +99,16 @@ export default {
         follows_len: 0,
         name: "",
         work_menus_len: 0,
+        isFollowing: false,
+        _id:''
       },
       info:[],
-      menuList: []
+      getInfoUserId: '' // 需要获取的用户id
     }
   },
   async mounted(){
     
-    let {userId} = this.$route.query;
     
-    this.userInfo = this.$store.state.userInfo;
-    if(!userId){
-      userId = this.userInfo._id;
-    }
-    this.isOwner = userId === this.userInfo._id; // 是否是自己
-    this.currentUserId = userId;
-    // 如果不是自己，获取userInfo
-    if(!this.isOwner) {
-      let data = await userInfo({userId});
-      this.userInfo = data.data;
-    }
-   let menuList = await getMenus({userId});
-   console.log(menuList);
-   this.info = menuList.data;
   },
   computed: {
     // userInfo(){
@@ -114,16 +117,19 @@ export default {
   },
   watch: {
     $route: {
-      handler(){
+      async handler(){
         if(this.activeName !== this.$route.name){
           this.activeName = this.$route.name;
+          
         }
+        await this.getUserInfo();
+        await this.getActiveNameData();
       },
       immediate: true
     },
   },
   methods: {
-    handleClick(tab, event) {
+    async handleClick(tab, event) {
       const {name} = tab;
       this.$router.push({
         name: name,
@@ -131,6 +137,32 @@ export default {
           ...this.$route.query
         }
       })
+    },
+    async getUserInfo(){
+      let {userId} = this.$route.query;
+      this.userId = this.$store.state.userInfo._id;
+      if(!userId){
+        userId = this.userId;
+      }
+      this.isOwner = userId === this.userId; // 是否是自己
+      this.currentUserId = userId;
+      // 如果不是自己，获取userInfo
+      if(this.getInfoUserId !== userId) {
+        console.log(1111111)
+        let data = await userInfo({userId});
+        this.userInfo = data.data;
+      }
+      this.getInfoUserId = userId;
+    },
+    async getActiveNameData(){
+      console.log('this.getInfoUserId', this.getInfoUserId)
+      let menuList = await getOtherInfo[this.activeName]({userId: this.getInfoUserId});
+      this.info = menuList.list;
+    },
+    async follow(){ // 关注
+      let data = await toggleFollowing({followUserId: this.userInfo._id});
+      this.userInfo.isFollowing = data.data.isFollowing;
+      this.userInfo.follows_len = data.data.follows_len;
     }
   }
 }
