@@ -61,5 +61,8 @@ export async function following(params){
   return data.data;
 }
 // 我的粉丝
-
+export async function fans(params){
+  let data = await axios.get('/api/user/fans', {params});
+  return data.data;
+}
 // 我的收藏

@@ -9,7 +9,12 @@
           <div style="padding: 14px;" class="menu-card-detail">
             <strong>{{item.title}}</strong>
             <span>26 评论</span>
-            <em>{{item.name}}</em>
+            <router-link 
+              :to="{name: 'space', query:{userId: item.userId}}"
+              tag="em"
+            >
+            {{item.name}}
+            </router-link>
           </div>
         </router-link> 
       </el-card>
