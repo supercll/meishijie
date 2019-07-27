@@ -1,11 +1,11 @@
 <template>
   <div class="fans">
-		<div class="info-empty">
+		<!-- <div class="info-empty">
 			<div>
 				<p>私房菜不要偷偷享用哦~~制作成菜谱与大家分享吧！</p>
 				<a href="">发布菜单</a>
 			</div>
-		</div>
+		</div> -->
 		
 		<ul class="fans clearfix">
 			<router-link :to="{name: 'space',query: {userId: item._id}}" tag="li" v-for="item in info" :key="item._id">

@@ -27,7 +27,7 @@
             <a id="tongji_author" target="_blank" href="https://i.meishi.cc/cook.php?id=9229605">C陈(来自微信.)</a>
           </h4>
           <span>菜谱：3　/　关注：1　/　粉丝：74</span>
-          <strong>2016-12-22　/　<em id="viewclicknum">7535</em>人看过</strong>
+          <strong>2016-12-22</strong>
         </div>
       </div>
 
