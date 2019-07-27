@@ -1,15 +1,21 @@
 <template>
   <div class="menu-detail">
-    <detail-header></detail-header>
-    <detail-content></detail-content>
+    <detail-header :info="menuInfo"></detail-header>
+    <detail-content :info="menuInfo"></detail-content>
   </div>
 </template>
 <script>
 import DetailHeader from './detail-header'
 import DetailContent from './detail-content'
+import { menuInfo, toggleCollection } from '@/service/api'
 export default {
   components: {DetailHeader, DetailContent},
-  mounted(){
+  data(){
+    return {
+      menuInfo: {}
+    }
+  },
+  async mounted(){
     let {menuId} = this.$route.query;
     if(!menuId) {
       this.$message({
@@ -18,7 +24,8 @@ export default {
       });
       return;
     }
-    console.log(menuId)
+    const data = await menuInfo({menuId});
+    this.menuInfo = data.data.info;
   }
 }
 </script>

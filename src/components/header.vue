@@ -8,11 +8,11 @@
             </a>
           </el-col>
           <el-col :span="10" :offset="2">
-            <el-input
+            <!-- <el-input
               placeholder="请输入内容"
               suffix-icon="el-icon-search"
             >
-            </el-input>
+            </el-input> -->
           </el-col>
           <el-col :span="6" :offset="3" class="avatar-box" v-if="isLogin">
             <router-link :to="{name: 'space'}">

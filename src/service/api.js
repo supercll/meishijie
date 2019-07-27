@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { async } from 'q';
 
 axios.interceptors.request.use(
   config => {
@@ -50,6 +51,24 @@ export async function getMenus(params){
   let data = await axios.get('/api/menu/query', {params});
   return data.data;
 }
+// 根据id，拿到菜谱的详细信息
+export async function menuInfo(params){
+  let data = await axios.get('/api/menu/menuInfo', {params});
+  return data.data;
+}
+
+// toggle 收藏{menuId}
+
+export async function toggleCollection(params){
+  let data = await axios.post('/api/user/collection', params);
+  return data.data;
+}
+// 收藏
+export async function collection(params){
+  let data = await axios.get('/api/user/collection', {params});
+  return data.data;
+}
+
 // toggle关注 {followUserId}
 export async function toggleFollowing(params){
   let data = await axios.post('/api/user/following', params);

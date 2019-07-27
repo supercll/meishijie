@@ -73,7 +73,7 @@
 <script>
 import MenuCard from '@/components/menu-card.vue'
 import Fans from './fans'
-import { userInfo, getMenus, toggleFollowing, following,fans } from '@/service/api'
+import { userInfo, getMenus, toggleFollowing, following,fans, collection } from '@/service/api'
 
 const getOtherInfo = {
   async works(params){  // 作品
@@ -84,6 +84,9 @@ const getOtherInfo = {
   },
   async fans(params){  // 关注
     return (await fans(params)).data;
+  },
+  async collection(params){
+    return (await collection(params)).data;
   }
 }
 
@@ -168,6 +171,7 @@ export default {
       console.log('this.getInfoUserId', this.getInfoUserId)
       if(!this.getInfoUserId) return; 
       let menuList = await getOtherInfo[this.activeName]({userId: this.getInfoUserId});
+      console.log(menuList)
       this.info = menuList.list;
     },
     async follow(){ // 关注

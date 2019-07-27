@@ -4,9 +4,15 @@
     <div class="detail-header-right">
 
       <div class="detail-title clearfix">
-          <h1 class="title">韩国部队火锅</h1>
-          <span class="detail-collection">
-            收藏(200)
+          <h1 class="title">{{info.title}}</h1>
+          <span v-if="!isOwner" class="detail-collection" :class="{
+            collecte: !info.isCollection,
+            collected: info.isCollection
+          }"
+          @click="collection"
+          >
+            {{info.isCollection ? '已收藏': '收藏'}}
+            ({{info.collection_len}})
           </span>
       </div>
       
@@ -34,6 +40,31 @@
     </div>
   </section>
 </template>
+<script>
+import { toggleCollection } from '@/service/api'
+export default {
+  props:{
+    info: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  computed:{
+    isOwner(){
+      return this.$store.state.userInfo._id === this.info.userId;
+    }
+  },
+  methods: {
+    async collection(){
+      let data = await toggleCollection({menuId: this.info._id});
+      this.info.collection_len = data.data.collection_len;
+      this.info.isCollection = data.data.isCollection;
+
+    }
+  }
+}
+</script>
+
 <style lang="stylus">
 .detail-header
   margin-top 40px
@@ -57,15 +88,19 @@
         font-size: 36px;
         color: #333;
         float left
+      .collected
+        background: #999;
+      .collecte
+        background: #ff3232;
       .detail-collection
         float right
         display block
         height: 50px;
         line-height: 44px;
-        background: #ff3232;
+        color #fff
         padding: 0px 14px;
         text-align center
-        color #fff
+        
         margin-top 25px
         cursor pointer
     
