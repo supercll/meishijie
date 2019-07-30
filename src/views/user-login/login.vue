@@ -21,6 +21,8 @@
   </div>
 </template>
 <script>
+import {login} from '@/service/api';
+
 export default {
   data() {
     return {
@@ -41,9 +43,21 @@ export default {
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
+
         if (valid) {
           // 在这里向后端发送登录用户名和密码
-          
+          login({
+            name: this.ruleForm.name,
+            password: this.ruleForm.password
+          }).then((data) => {
+            if(data.code === 0) {  // 成功
+              localStorage.setItem('token', data.data.token);
+              window.location.href = '/';
+            }
+            if(data.code === 1){
+              this.$message.error(data.mes);
+            }
+          })
         } else {
           console.log('error submit!!');
           return false;

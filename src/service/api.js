@@ -106,7 +106,7 @@ export async function login_out(){
  * 获取用户信息
  * @export
  * @param {Object} params - 
- * @param {string} params.userId - 用户id
+ * @param {string} [params.userId] - 用户id
  * @returns
  */
 export async function userInfo(params){
