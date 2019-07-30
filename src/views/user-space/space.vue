@@ -3,18 +3,18 @@
     <h2>欢迎来到我的美食空间</h2>
     <div class="user-info">
       <div class="user-avatar">
-        <img src="" alt="">
+        <img :src="userInfo.avatar" alt="">
       </div>
       <div class="user-main">
-        <h1>测试</h1>
+        <h1>{{userInfo.name}}</h1>
         <span class="info">
-          <em>测试加入美食杰</em>
+          <em>{{userInfo.createdAt}}加入美食杰</em>
           |
           <router-link :to="{}">编辑个人资料</router-link>
         </span>
-        <div class="tools">
+        <div class="tools" v-show="!isOwner">
           <!-- follow-at  no-follow-at-->
-				  <a href="javascript:;" class="follow-at"> '已关注' : '+关注' </a>
+				  <a href="javascript:;" @click="toggleFollow" class="follow-at" :class="{'no-follow-at': userInfo.isFollowing}"> {{ userInfo.isFollowing ? '已关注' : '+关注' }}  </a>
         </div>
       </div>
 
@@ -22,25 +22,25 @@
         <li>
           <div>
             <span>关注</span>
-            <strong>0</strong>
+            <strong>{{userInfo.following_len}}</strong>
           </div>
         </li>
         <li>
           <div>
             <span>粉丝</span>
-            <strong>0</strong>
+            <strong>{{userInfo.follows_len}}</strong>
           </div>
         </li>
         <li>
           <div>
             <span>收藏</span>
-            <strong>0</strong>
+            <strong>{{userInfo.collections_len}}</strong>
           </div>
         </li>
         <li>
           <div>
             <span>发布菜谱</span>
-            <strong>0</strong>
+            <strong>{{userInfo.work_menus_len}}</strong>
           </div>
         </li>
       </ul>
@@ -65,9 +65,7 @@
   </div>
 </template>
 <script>
-import MenuCard from '@/components/menu-card.vue'
-import Fans from './fans'
-
+import {userInfo,toggleFollowing} from '@/service/api';
 const getOtherInfo = {
   async works(params){  // 作品
     return (await getMenus(params)).data;
@@ -84,7 +82,40 @@ const getOtherInfo = {
 }
 
 export default {
-  components: {MenuCard, Fans}
+  name: 'Space',
+  data(){
+    return {
+      userInfo:{},
+      isOwner: false  // 如果userId为空，true；userId === this.$store.state.userinfo.userId
+    }
+  },
+  watch:{
+    $route: {
+      async handler(){
+        let {userId} = this.$route.query;
+        console.log(userId);
+        this.isOwner = !userId || userId === this.$store.state.userInfo.userId;
+        console.log(this.isOwner)
+        if(!this.isOwner){
+          //需要那这个userId 的信息
+          const data = await userInfo({userId});
+          console.log(data);
+          this.userInfo = data.data;
+        }else {
+          this.userInfo = this.$store.state.userInfo
+        }
+        console.log(this.userInfo);
+      },
+      immediate: true
+    }
+  },
+  methods:{
+    async toggleFollow(){
+      const data = await toggleFollowing({followUserId: this.userInfo.userId});
+      console.log(data);
+      this.userInfo = data.data;
+    }
+  }
 }
 </script>
 
