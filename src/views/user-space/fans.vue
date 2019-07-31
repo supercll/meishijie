@@ -3,19 +3,19 @@
 		<div class="info-empty">
 			<div>
 				<p>还没有被关注哦！多发布菜谱，更容易被找到。</p>
+				<p>还没有关注别人哦！可以预览菜谱，找到别人</p>
 			</div>
 		</div>
-		
 		<ul class="fans clearfix">
 			<router-link to="" tag="li" v-for="item in 3" :key="item">
 				<a href="javascript:;" class="img">
-				<img src="https://s1.st.meishij.net/user/154/01/t62904_152386836353255.jpg"></a>
+				<img src=""></a>
 				<div class="c">
 					<strong class="name">
-						<router-link :to="{}">测试</router-link>
+						<router-link to="">测试</router-link>
 					</strong>
 					<em class="info"><span>粉丝：</span> 0　|　<span>关注：</span>0</em>
-					<em class="info"><span>简介：</span>爱好美食和旅游！</em>
+					<em class="info"><span>简介：</span>简介</em>
 				</div>
 			</router-link>
 		</ul>
@@ -23,10 +23,16 @@
 </template>
 <script>
 export default {
+	data(){
+	},
 	props:{
 		info:{
 			type: Array,
 			default: () => []
+		},
+		activeName:{
+			type: String,
+			default: 'fans'
 		}
 	}
 }
