@@ -204,7 +204,7 @@ export async function fans(params){
  * @returns
  */
 export async function upload(params){
-  return await http.post('/user/fans', {params});
+  return await http.post('/upload', {params});
 }
 
 /**
