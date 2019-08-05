@@ -6,8 +6,8 @@ function randomNum(n){
   return Math.ceil(Math.random()*(n));
 }
 
-function createRandomId(){
-  return randomNum(4) + '-' + randomNum(4);
+function createRandomId(n=4){
+  return randomNum(n) + '-' + randomNum(n);
 }
 
 export default function createMockMenuPublishData(userId){
@@ -28,7 +28,7 @@ export default function createMockMenuPublishData(userId){
           "accessories_material|3-5": [{name: Random.csentence(3), specs: Random.csentence(3)}], // 辅料
         },
         "steps|3-5": [{img_url: 'https://s1.st.meishij.net/rs/208/102/1025708/n1025708_156144944939153.jpg',describe: Random.csentence(310)}], // 步骤
-        classify: createRandomId(), // 菜谱分类
+        classify: createRandomId(3), // 菜谱分类
         skill: Random.csentence(50),
       }]
   })
