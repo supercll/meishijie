@@ -64,7 +64,7 @@ export async function getClassify(){
 /**
  * 发布菜谱
  * @export
- * @param {Object} params - 参考mock的数据
+ * @param {Object} params - 需要上传的数据，参考backData
  * @returns
  */
 export async function publish(params){
