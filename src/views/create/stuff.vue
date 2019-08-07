@@ -11,12 +11,6 @@
   </div>
 </template>
 <script>
-import {cloneDeep} from 'lodash';
-
-const material_struct = {
-  name: '',
-  specs: ''
-}
 
 export default {
   props: {
