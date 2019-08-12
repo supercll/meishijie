@@ -32,10 +32,6 @@
             <p class="p1">最喜欢吃鸡翅了</p>
             <div class="info clearfix">
               <span style="float: left;">2019-08-29 16:39:42</span>
-              <span style="float: right;">
-                <i class="el-icon-thumb thumbs thumbs-actve"></i>
-                0
-              </span>
             </div>
           </div>
         </li>

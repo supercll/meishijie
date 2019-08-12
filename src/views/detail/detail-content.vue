@@ -75,11 +75,10 @@
         li 
           float left
           box-sizing border-box
-          width 100px
           height 54px
           line-height 54px
           margin 0 5px 5px 5px
-          padding-left 30px
+          padding 0 10px
           border 1px solid #eee
   .detail-explain
     background-color #fff

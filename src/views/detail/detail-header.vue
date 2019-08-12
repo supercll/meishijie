@@ -4,10 +4,13 @@
     <div class="detail-header-right">
 
       <div class="detail-title clearfix">
-          <h1 class="title">{{info.title}}</h1>
-          <span  class="detail-collection">
-            '已收藏': '收藏'
-          </span>
+          <h1 class="title">测试数据</h1>
+          <div class="detail-collection">
+            <!-- collection-at  no-collection-at-->
+            <a href="javascript:;" class="collection-at"> 
+                '已收藏'  : '收藏'
+            </a>
+          </div>
       </div>
       
       <ul class="detail-property clearfix">
@@ -18,13 +21,12 @@
       </ul>
 
       <div class="user">
-        <a target="_blank" id="tongji_author_img" href="https://i.meishi.cc/cook.php?id=9229605" class="img">
+        <a target="_blank" id="tongji_author_img" href="" class="img">
           <img src="https://s1.c.meishij.net/images/default/tx2_2.png">
-          <span class="masker pngFix"></span>
         </a>
         <div class="info">
           <h4>
-            <a id="tongji_author" target="_blank" href="https://i.meishi.cc/cook.php?id=9229605">C陈(来自微信.)</a>
+            <a id="tongji_author" target="_blank" href="">C陈(来自微信.)</a>
           </h4>
           <span>菜谱：3　/　关注：1　/　粉丝：74</span>
           <strong>2016-12-22</strong>
@@ -83,6 +85,17 @@ export default {
         
         margin-top 25px
         cursor pointer
+        a 
+          display: inline-block;
+          padding: 3px 0;
+          width: 50px;
+          color: #fff;
+          text-align: center;
+          line-height 20px
+        .collection-at
+          background-color: #ff3232;
+        .no-collection-at
+          background-color: #999;
     
     .detail-property
       margin-left 2px

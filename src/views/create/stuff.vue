@@ -1,26 +1,38 @@
 <template>
   <div class="stuff">
     <div class="clearfix">
-      <div class="raw-item" v-for="(item,index) in 3" :key="index" >
-        <el-input placeholder="请输入内容" style="width: 200px" ></el-input>
-        <el-input placeholder="请输入内容" style="width: 100px" ></el-input>
-        <i class="delete-icon el-icon-close"></i>
+      {{value}}
+      <div class="raw-item" v-for="(item,index) in value" :key="index" >
+        <el-input placeholder="请输入内容" style="width: 200px" v-model="item.name" ></el-input>
+        <el-input placeholder="请输入内容" style="width: 100px" v-model="item.specs"></el-input>
+        <i class="delete-icon el-icon-close" v-show="value.length !== 1" @click="remove(index)"></i>
       </div>
     </div>
-    <el-button  class="eaeaea" type="primary" size="medium" icon="el-icon-plus">增加一项</el-button>
+    <el-button  class="eaeaea" type="primary" size="medium" icon="el-icon-plus" @click="add">增加一项</el-button>
   </div>
 </template>
 <script>
-
+// v-model 在组件上面双向绑定 value 发布事件input 
 export default {
   props: {
-    type: {
-      type: String,
-      default: 'main' // 主料 main | 辅料 accessories
-    },
-    material: {
+    value: {
       type: Array,
       default: () => []
+    }
+  },
+  methods:{
+    remove(index){
+      //this.value.splice(index, 1);
+      const newValue = this.value.filter((item, i) => {
+        return i !== index;
+      })
+      this.$emit('input', newValue)
+    },
+    add(){
+      this.$emit('input', [
+        ...this.value,
+        { "name": "", "specs": "" }
+      ])
     }
   }
 }

@@ -3,9 +3,10 @@
     <div class="step-number">{{n}}.</div>
     <div class="upload-box">
       <upload-img
-        action="/api/menu/step/upload"
+        action="/api/upload?type=step"
         :image-url="$options.imageUrl"
         :img-max-width="184"
+        @res-url="changeUrl"
       ></upload-img>
     </div>
     <el-input
@@ -13,9 +14,10 @@
       type="textarea"
       :rows="8"
       placeholder="请输入内容"
+      v-model="value.describe"
     >
     </el-input>
-    <i class="delete-icon el-icon-close"></i>
+    <i class="delete-icon el-icon-close" @click="remove"></i>
   </div>
 </template>
 <script>
@@ -32,9 +34,20 @@ export default {
       type: Number,
       default: 1
     },
-    stepData:{
+    value:{
       type: Object,
       default:() => ({})
+    }
+  },
+  methods: {
+    changeUrl(data){
+      this.$emit('input', {
+        ...this.value,
+        img_url: data.resImgUrl
+      })
+    },
+    remove(){
+      this.$emit('remove', this.n);
     }
   }
 }
