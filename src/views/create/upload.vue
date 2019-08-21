@@ -5,6 +5,8 @@
       <upload-img
         action="/api/menu/step/upload"
         :image-url="$options.imageUrl"
+        @res-url="(data) => {step.img_url = data.resImgUrl}"
+        :img-max-width="184"
       ></upload-img>
     </div>
     <el-input
@@ -43,7 +45,8 @@ export default {
   },
   data(){
     return {
-      step: Object.assign(this.stepData)
+      step: Object.assign(this.stepData),
+      resUrlQueen: {}
     }
   },
   watch:{

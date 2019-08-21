@@ -6,7 +6,7 @@
     :on-success="handleAvatarSuccess"
     :before-upload="beforeAvatarUpload"
     >
-    <img :src="url" />
+    <img :src="url" :style="{maxWidth: imgMaxWidth + 'px'}" />
   </el-upload>
 </template>
 <script>
@@ -20,6 +20,10 @@ export default {
     imageUrl: {
       type: String,
       default: ''
+    },
+    imgMaxWidth:{  // 设置的最大宽度
+      type: [Number, String],
+      default: 'auto'
     }
   },
   data(){
@@ -37,9 +41,13 @@ export default {
         return;
       }
       this.url = URL.createObjectURL(file.raw);
+      this.$emit('res-url', {
+        resImgUrl: res.data.url
+      })
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
+      console.log(file.type);
+      const isJPG = file.type === 'image/jpeg' || file.type === 'image/gif';
       const isLt2M = file.size / 1024 / 1024 < this.maxSize;
 
       if (!isJPG) {

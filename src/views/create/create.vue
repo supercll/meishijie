@@ -41,7 +41,8 @@
         <div class="upload-img">
           <upload-img
             action="/api/menu/product/upload"
-            :image-url="imageUrl"
+            :image-url="product_pic_url"
+            @res-url="(data) => {this.product_pic_url = data.resImgUrl}"
           ></upload-img>
         </div>
         <el-input
@@ -156,7 +157,7 @@ export default {
         main_material:[],  // 主料
         accessories_material: [] // 辅料
       },
-      imageUrl: 'https://s1.c.meishij.net/n/images/upload_big_img.png?_=1561906961',
+      product_pic_url: 'https://s1.c.meishij.net/n/images/upload_big_img.png?_=1561906961',
       // 步骤
       steps: Array(3).fill(1).map(item => Object.assign({inter_id: Math.random()}, step_struct)),
       // 小技巧
