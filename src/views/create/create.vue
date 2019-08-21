@@ -39,7 +39,10 @@
       <h5>成品图 (328*440)</h5>
       <div class="upload-img-box clearfix">
         <div class="upload-img">
-          <img src="https://s1.c.meishij.net/n/images/upload_big_img.png?_=1561906961" />
+          <upload-img
+            action="/api/menu/product/upload"
+            :image-url="imageUrl"
+          ></upload-img>
         </div>
         <el-input
           class="introduce-text"
@@ -108,6 +111,7 @@
 <script>
 import Stuff from './stuff'
 import Upload from './upload'
+import UploadImg from './upload-img'
 import {omit} from 'lodash'
 import createMockMenuPublishData from '@/mock/publish'
 
@@ -139,7 +143,7 @@ const backData = {
 }
 export default {
   name: 'create',
-  components: {Stuff,Upload},
+  components: {Stuff,Upload,UploadImg},
   properties_placeholder,
   data(){
     return {
@@ -152,6 +156,7 @@ export default {
         main_material:[],  // 主料
         accessories_material: [] // 辅料
       },
+      imageUrl: 'https://s1.c.meishij.net/n/images/upload_big_img.png?_=1561906961',
       // 步骤
       steps: Array(3).fill(1).map(item => Object.assign({inter_id: Math.random()}, step_struct)),
       // 小技巧

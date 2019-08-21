@@ -2,7 +2,10 @@
   <div class="step clearfix">
     <div class="step-number">{{n}}.</div>
     <div class="upload-box">
-      <img src="https://s1.c.meishij.net/n/images/upload_step_img.png" alt="">
+      <upload-img
+        action="/api/menu/step/upload"
+        :image-url="$options.imageUrl"
+      ></upload-img>
     </div>
     <el-input
       class="introduce-text"
@@ -20,8 +23,10 @@
   </div>
 </template>
 <script>
-
+import UploadImg from './upload-img'
 export default {
+  components: {UploadImg},
+  imageUrl: 'https://s1.c.meishij.net/n/images/upload_step_img.png',
   props: {
     n: {
       type: Number,
