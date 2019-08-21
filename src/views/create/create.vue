@@ -223,7 +223,7 @@ export default {
     composeData(){
       return  {
         title: this.title,  // 标题
-        product_pic_url: '', // 成品图URL
+        product_pic_url: this.product_pic_url, // 成品图URL
         product_story: this.product_story, // 成品图故事
         property: {
           // craft: this.selectProperties.craft,  // 工艺 enum: [1,2,3,4],
@@ -249,9 +249,13 @@ export default {
       // await publish(this.composeData())
       // mock
       let menu = createMockMenuPublishData().menus;
+      let realMenu = this.composeData();//  真是上传数据
       menu.userId = this.userInfo._id;
+      realMenu.userId = this.userInfo._id;
       
-      let data = (await publish(menu));
+      //let data = (await publish(realMenu));
+      // mock数据
+      let data = (await publish(realMenu));
       if(data.code === 0){
         this.$message({
           message: '发布成功',
