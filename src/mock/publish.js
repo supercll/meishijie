@@ -21,7 +21,7 @@ export default function createMockMenuPublishData(userId){
           craft: createRandomId(),  // 工艺 enum: [1,2,3,4],
           flavor: createRandomId(),  // 口味  enum: [1,2,3,4],
           hard: createRandomId(),   // 难度 enum: [1,2,3,4],
-          pepole: createRandomId()  // pepole 人数: [1,2,3,4],
+          people: createRandomId()  // pepole 人数: [1,2,3,4],
         },  // 属性
         raw_material: { // 料
           "main_material|3-5": [{name: Random.csentence(3), specs: Random.csentence(3)}], // 主料

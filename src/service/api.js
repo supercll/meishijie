@@ -27,6 +27,7 @@ export async function getClassify(){
 
 // 发布菜谱
 export async function publish(params){
+  console.log(JSON.stringify(params, null, 2))
   let data = await axios.post('/api/menu/publish', params);
   return data.data;
 }
