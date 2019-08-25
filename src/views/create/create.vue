@@ -69,10 +69,10 @@
 </template>
 <script>
 import Stuff from './stuff'
-import Upload from './upload'
+import stepUpload from './step-upload'
 export default {
   name: 'create',
-  components: {Stuff,Upload}
+  components: {Stuff,stepUpload}
 }
 </script>
 <style lang="stylus">
