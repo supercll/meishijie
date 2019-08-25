@@ -19,8 +19,7 @@
               'no-follow-at': userInfo.isFollowing
             }"
             @click="follow"
-          > {{userInfo.isFollowing ? '已关注' : '+关注'}} </a>			
-				  <!-- <a href="javascript;" class="no-follow-at"> 已关注 </a>			 -->
+          > {{userInfo.isFollowing ? '已关注' : '+关注'}} </a>
         </div>
       </div>
 
@@ -112,21 +111,11 @@ export default {
       getInfoUserId: '' // 需要获取的用户id
     }
   },
-  async mounted(){
-    
-    
-  },
-  computed: {
-    // userInfo(){
-    //   return this.$store.state.userInfo;
-    // }
-  },
   watch: {
     $route: {
       async handler(){
         if(this.activeName !== this.$route.name){
           this.activeName = this.$route.name;
-          
         }
         await this.getUserInfo();
         await this.getActiveNameData();
@@ -147,14 +136,14 @@ export default {
     async getUserInfo(){
       let {userId} = this.$route.query;
       this.userId = this.$store.state.userInfo._id;
+      
       if(!userId){
         userId = this.userId;
       }
       this.isOwner = userId === this.userId; // 是否是自己
       this.currentUserId = userId;
       // 如果不是自己，获取userInfo
-      if(this.getInfoUserId !== userId) {
-        console.log('走了吗')
+      if(!this.isOwner) {
         let data = await userInfo({userId});
         if(data.code === 1){
           this.$message({
@@ -164,14 +153,14 @@ export default {
           return ;
         }
         this.userInfo = data.data;
+      }else {
+        this.userInfo = this.$store.state.userInfo;
       }
-      this.getInfoUserId = userId;
+      
     },
     async getActiveNameData(){
-      console.log('this.getInfoUserId', this.getInfoUserId)
-      if(!this.getInfoUserId) return; 
-      let menuList = await getOtherInfo[this.activeName]({userId: this.getInfoUserId});
-      console.log(menuList)
+      if(!this.currentUserId) return; 
+      let menuList = await getOtherInfo[this.activeName]({userId: this.currentUserId});
       this.info = menuList.list;
     },
     async follow(){ // 关注

@@ -253,9 +253,9 @@ export default {
       menu.userId = this.userInfo._id;
       realMenu.userId = this.userInfo._id;
       
-      //let data = (await publish(realMenu));
+      let data = (await publish(menu));
       // mock数据
-      let data = (await publish(realMenu));
+      //let data = (await publish(realMenu));
       if(data.code === 0){
         this.$message({
           message: '发布成功',

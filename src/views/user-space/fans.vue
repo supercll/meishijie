@@ -15,7 +15,7 @@
 					<strong class="name">
 						<router-link :to="{name: 'space',query: {userId: item._id}}">{{item.name}}</router-link>
 					</strong>
-					<em class="info"><span>粉丝：</span>33992　|　<span>关注：</span>4619　|　<span>发布：</span>782</em>
+					<em class="info"><span>粉丝：</span> {{item.follows_len}}　|　<span>关注：</span>{{item.following_len}}</em>
 					<em class="info"><span>简介：</span>爱好美食和旅游！</em>
 					<span class="time">
 						<a href="javascript:void(0);">取消关注</a>

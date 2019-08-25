@@ -101,7 +101,7 @@ const router = new Router({
 })
 router.beforeEach(async (to, from, next) => {
   const token = localStorage.getItem('token');
-  Store.commit('changeLogin', !!token);
+  // Store.commit('changeLogin', !!token);
   if(to.matched.some((o) => o.meta.login) || to.name === 'login'){
     if(token && to.name === 'login') {
       next({name: 'home'})
@@ -115,9 +115,11 @@ router.beforeEach(async (to, from, next) => {
         });
         Store.commit('changeLogin', false);
         next({name: 'login'});
-        return;
+      }else {
+        Store.commit('changeLogin', true);
+        next()
       }
-      next()
+      
     }else if(!token && to.name === 'login'){
       next();
     }else {
