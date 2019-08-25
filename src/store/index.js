@@ -31,31 +31,18 @@ let store = new Vuex.Store({
       commit('changeClassify', data);
     },
     async userInfoAction({commit, state}){
-      console.log(9999999)
       let data = (await userInfo());
       if(data.code !== 0){
         localStorage.removeItem('token');
-        return data;
+        commit('changeLogin', false);
+        return false;
       }
       // 登录还在有效期
       commit('changeUserInfo', data.data);
-      return data;
+      commit('changeLogin', true);
+      return true;
     }
   }
 })
-
-// store.watch((state) => {
-//   return state.isLogin
-// }, (newValue, oldValue) => {
-//   console.log('store.watch', newValue)
-//   if(newValue){
-//     if(!store.state.userInfo.name){
-//       // 发送请求，那数据
-//       store.dispatch('userInfoAction')
-//     }
-//   }else {
-//     store.commit('changeUserInfo', {});
-//   }
-// })
 
 export default store;

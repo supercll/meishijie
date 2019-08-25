@@ -46,7 +46,6 @@ export default {
       })
     },
     beforeAvatarUpload(file) {
-      console.log(file.type);
       const isJPG = file.type === 'image/jpeg' || file.type === 'image/gif';
       const isLt2M = file.size / 1024 / 1024 < this.maxSize;
 

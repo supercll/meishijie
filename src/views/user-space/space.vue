@@ -10,7 +10,7 @@
         <span class="info">
           <em>{{userInfo.createdAt}}加入美食杰</em>
           |
-          <a href="">编辑个人资料</a>
+          <router-link :to="{name: 'edit'}">编辑个人资料</router-link>
         </span>
         <div class="tools" v-if="!isOwner">
 				  <a href="javascript:;" 
@@ -145,6 +145,7 @@ export default {
       // 如果不是自己，获取userInfo
       if(!this.isOwner) {
         let data = await userInfo({userId});
+        console.log('走这里来了')
         if(data.code === 1){
           this.$message({
             message: data.mes,

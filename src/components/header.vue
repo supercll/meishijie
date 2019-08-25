@@ -14,6 +14,7 @@
             >
             </el-input> -->
           </el-col>
+          {{isLogin}}
           <el-col :span="6" :offset="3" class="avatar-box" v-if="isLogin">
             <router-link :to="{name: 'space'}">
               <el-avatar style="vertical-align: middle;" shape="square" size="medium" :src="userInfo.avatar"></el-avatar>
@@ -76,16 +77,6 @@ export default {
             name: 'home'
           })
         });
-    },
-    async getOwnInfo(){
-      let data = await this.$store.dispatch('userInfoAction');
-      if(data.error === 401 && this.isLogin){
-        this.$message({
-          message: data.mes,
-          type: 'warning'
-        });
-        this.$store.commit('changeLogin', false);
-      }
     }
   }
 }

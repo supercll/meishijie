@@ -9,6 +9,7 @@ import Home from './views/home/Home.vue'
 
 const Recipe = () => import( '@/views/recipe-daquan/recipe' );
 const Create = () => import( '@/views/create/create' );
+const Edit = () => import( '@/views/user-space/edit' );
 
 const Space = () => import( /* webpackChunkName: "space" */ '@/views/user-space/space');
 
@@ -33,6 +34,13 @@ const viewsRoute = [
     meta: {
       login: true
     }
+  },
+  {
+    path: '/edit',
+    title: '编辑个人资料',
+    name: 'edit',
+    meta: {login: true},
+    component: Edit
   },
   {
     path: '/space',
@@ -100,34 +108,26 @@ const router = new Router({
   ]
 })
 router.beforeEach(async (to, from, next) => {
-  const token = localStorage.getItem('token');
-  // Store.commit('changeLogin', !!token);
+  const isLogin = await Store.dispatch('userInfoAction');
+
   if(to.matched.some((o) => o.meta.login) || to.name === 'login'){
-    if(token && to.name === 'login') {
-      next({name: 'home'})
-    }else if(token && to.name !== 'login'){
-      // 是否还处在登录状态
-      let data = await Store.dispatch('userInfoAction');
-      if(data.error === 401){
-        Message.warning({
-          message: data.mes,
-          type: 'warning'
-        });
-        Store.commit('changeLogin', false);
-        next({name: 'login'});
-      }else {
-        Store.commit('changeLogin', true);
-        next()
-      }
-      
-    }else if(!token && to.name === 'login'){
+    if(!isLogin && to.name === 'login'){
       next();
+      return;
+    }else if(!isLogin && to.name !== 'login'){
+      Message({
+        message: '请先登录',
+        type: 'error'
+      });
+      console.log('走这里了22222')
+      next({name: 'home'});
     }else {
-      next({name: 'login'});
+      next();
     }
-    return;
+  }else{
+    next();
   }
-  next();
+  
 })
 
 
