@@ -1,20 +1,22 @@
 <template>
   <div class="recipe">
     <!-- v-model="activeName" -->
-    <el-tabs  type="border-card" @tab-click="handleClick">
-      <el-tab-pane label="家常菜谱">
-        <h3>家常菜谱</h3>
+    <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
+
+      <el-tab-pane 
+        :label="item.parent_name" 
+        v-for="item in classify" 
+        :key="item.parent_type"
+        :name="item.parent_type"
+      >
+        <h3>{{item.parent_name}}</h3>
         <div class="recipe-link">
-          <a href="" class="active">家常菜</a>
-          <a href="">家常菜</a>
-          <a href="">家常菜</a>
-          <a href="">家常菜</a>
-          <a href="">家常菜</a>
+          <router-link 
+            :to="{name: 'recipe'}" 
+            v-for="list in item.list" :key="list.type"
+          >{{list.name}}</router-link>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-      <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-      <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
     </el-tabs>
     <h2>家常好味道，给你家一般的温暖</h2>
     <el-container>
@@ -22,39 +24,52 @@
         <div class="filter-box">
           <h4>筛选</h4>
           <!-- v-model="activeName" -->
-          <el-collapse  accordion>
-            <el-collapse-item title="一致性 Consistency" name="1">
+          <el-collapse v-model="propertiesActvieNames">
+            <el-collapse-item 
+              v-for="item in properties"
+              :key="item.parent_type"
+              :title="item.parent_name" 
+              :name="item.parent_type"
+            >
               <div class="filter-tags">
-                <el-tag type="info">标签三</el-tag>
-                <el-tag type="info">标签三</el-tag>
-                <el-tag type="info">标签三</el-tag>
-                <el-tag type="info">标签三</el-tag>
+                <el-tag 
+                  type="info" 
+                  v-for="option in item.list" 
+                  :key="option.type"
+                  :class="{'tag-selected': item.checkedType === option.type}"
+                >
+                  {{option.name}}
+                </el-tag>
               </div>
             </el-collapse-item>
-            <el-collapse-item title="一致性 Consistency" name="2">
-                <div class="filter-tags">
-                  <el-tag type="info">标签三</el-tag>
-                  <el-tag type="info">标签三</el-tag>
-                  <el-tag type="info">标签三</el-tag>
-                  <el-tag type="info">标签三</el-tag>
-                </div>
-              </el-collapse-item>
           </el-collapse>
         </div>
       </el-aside>
       <el-main>
-        <menu-card></menu-card>
+        <div class="recipe-loading"></div>
+        <menu-card :info='menus'></menu-card>
       </el-main>
     </el-container>
   </div>
 </template>
 <script>
 import MenuCard from '@/components/menu-card.vue'
+import properties from "@/mock/properties"
+import classify from "@/mock/classify"
 export default {
   components: {MenuCard},
-  methods: {
-    handleClick(tab, event) {
-      console.log(tab, event);
+  data(){
+    return {
+      activeName: '1',
+      properties:properties,
+      propertiesActvieNames:'',
+      menus:[],
+      classify: classify
+    }
+  },
+  methods:{
+    handleClick(){
+      
     }
   }
 }
@@ -83,11 +98,13 @@ export default {
       padding 10px
       width 100%
       float left
-  .recipe-aside
-    
+      box-sizing border-box
   .filter-tags 
     display flex
     flex-wrap wrap
     justify-content space-around
+    .tag-selected
+      background-color  #ff3232
+      color #fff
 </style>
 

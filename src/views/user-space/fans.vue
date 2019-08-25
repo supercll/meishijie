@@ -1,30 +1,38 @@
 <template>
   <div class="fans">
-		<div class="info-empty">
+		<!-- <div class="info-empty">
 			<div>
 				<p>私房菜不要偷偷享用哦~~制作成菜谱与大家分享吧！</p>
 				<a href="">发布菜单</a>
 			</div>
-		</div>
+		</div> -->
 		
 		<ul class="fans clearfix">
-			<router-link :to="{name: 'space',query: {id: n}}" tag="li" v-for="n in 10" :key="n">
+			<router-link :to="{name: 'space',query: {userId: item._id}}" tag="li" v-for="item in info" :key="item._id">
 				<a href="javascript:;" class="img">
 				<img src="https://s1.st.meishij.net/user/154/01/t62904_152386836353255.jpg"></a>
 				<div class="c">
 					<strong class="name">
-						<router-link :to="{name: 'space',query: {id: n}}">林冰儿</router-link>
+						<router-link :to="{name: 'space',query: {userId: item._id}}">{{item.name}}</router-link>
 					</strong>
-					<em class="info"><span>粉丝：</span>33992　|　<span>关注：</span>4619　|　<span>发布：</span>782</em>
+					<em class="info"><span>粉丝：</span> {{item.follows_len}}　|　<span>关注：</span>{{item.following_len}}</em>
 					<em class="info"><span>简介：</span>爱好美食和旅游！</em>
-					<span class="time">
-						<a href="javascript:void(0);">取消关注</a>
-					</span>
 				</div>
 			</router-link>
 		</ul>
 	</div>
 </template>
+<script>
+export default {
+	props:{
+		info:{
+			type: Array,
+			default: () => []
+		}
+	}
+}
+</script>
+
 <style lang="stylus">
 .fans 
   font-size 12px

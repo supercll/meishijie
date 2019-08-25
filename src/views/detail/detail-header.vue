@@ -4,9 +4,9 @@
     <div class="detail-header-right">
 
       <div class="detail-title clearfix">
-          <h1 class="title">韩国部队火锅</h1>
-          <span class="detail-collection">
-            收藏(200)
+          <h1 class="title">{{info.title}}</h1>
+          <span  class="detail-collection">
+            '已收藏': '收藏'
           </span>
       </div>
       
@@ -27,13 +27,24 @@
             <a id="tongji_author" target="_blank" href="https://i.meishi.cc/cook.php?id=9229605">C陈(来自微信.)</a>
           </h4>
           <span>菜谱：3　/　关注：1　/　粉丝：74</span>
-          <strong>2016-12-22　/　<em id="viewclicknum">7535</em>人看过</strong>
+          <strong>2016-12-22</strong>
         </div>
       </div>
 
     </div>
   </section>
 </template>
+<script>
+export default {
+  props:{
+    info: {
+      type: Object,
+      default: () => ({})
+    }
+  }
+}
+</script>
+
 <style lang="stylus">
 .detail-header
   margin-top 40px
@@ -57,15 +68,19 @@
         font-size: 36px;
         color: #333;
         float left
+      .collected
+        background: #999;
+      .collecte
+        background: #ff3232;
       .detail-collection
         float right
         display block
         height: 50px;
         line-height: 44px;
-        background: #ff3232;
+        color #fff
         padding: 0px 14px;
         text-align center
-        color #fff
+        
         margin-top 25px
         cursor pointer
     

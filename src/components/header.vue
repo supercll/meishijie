@@ -7,19 +7,18 @@
             <a href="" class="logo">
             </a>
           </el-col>
-          <el-col :span="10" :offset="2">
-            <el-input
-              placeholder="请输入内容"
-              suffix-icon="el-icon-search"
-            >
-            </el-input>
-          </el-col>
+          <el-col :span="10" :offset="2"></el-col>
           <el-col :span="6" :offset="3" class="avatar-box">
             <router-link :to="{name: 'space'}">
-              <el-avatar style="vertical-align: middle;" shape="square" size="medium" :src="avatarDefaultUrl"></el-avatar>
+              <el-avatar style="vertical-align: middle;" shape="square" size="medium" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"></el-avatar>
             </router-link>
-            <router-link :to="{name: 'space'}" class="user-name">辣手摧花</router-link>
+            <router-link :to="{name: 'space'}" class="user-name">测试</router-link>
             <router-link :to="{name: 'create'}" class="collection">发布菜谱</router-link>
+            <a href="javascript:;" class="collection">退出</a>
+          </el-col>
+          <el-col :span="6" :offset="3" class="avatar-box">
+            <router-link :to="{name: 'login'}" class="user-name">登录</router-link>
+            <router-link :to="{name: 'login'}" class="collection">注册</router-link>
           </el-col>
         </el-row>
       </div>
@@ -35,14 +34,7 @@
 import Menus from '@/components/menus'
 export default {
   name: 'headers',
-  data(){
-    return {
-      avatarDefaultUrl: 'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
-    }
-  },
-  components: {
-    Menus
-  }
+  components: {Menus}
 }
 </script>
 <style lang="stylus">

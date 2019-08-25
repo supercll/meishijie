@@ -7,17 +7,23 @@
     </el-carousel>
     <div>
       <h2>内容精选</h2>
-      <menu-card :margin-left="13"></menu-card>
+      <menu-card :margin-left="13" :info='info'></menu-card>
     </div>
   </div>
 </template>
 
 <script>
 import MenuCard from '@/components/menu-card.vue'
+
 export default {
   name: 'home',
   components: {
     MenuCard
+  },
+  data(){
+    return {
+      info: []
+    }
   }
 }
 </script>

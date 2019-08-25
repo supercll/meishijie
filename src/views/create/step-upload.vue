@@ -1,18 +1,47 @@
 <template>
   <div class="step clearfix">
-    <div class="step-number">1.</div>
+    <div class="step-number">{{n}}.</div>
     <div class="upload-box">
-      <img src="https://s1.c.meishij.net/n/images/upload_step_img.png" alt="">
+      <upload-img
+        action="/api/menu/step/upload"
+        :image-url="$options.imageUrl"
+        :img-max-width="184"
+      ></upload-img>
     </div>
     <el-input
       class="introduce-text"
       type="textarea"
       :rows="8"
-      placeholder="请输入内容">
+      placeholder="请输入内容"
+    >
     </el-input>
-    <i class="delete-icon el-icon-close"></i>
+    <i 
+      class="delete-icon el-icon-close" 
+    ></i>
   </div>
 </template>
+<script>
+import UploadImg from './upload-img'
+export default {
+  components: {UploadImg},
+  imageUrl: 'https://s1.c.meishij.net/n/images/upload_step_img.png',
+  props: {
+    n: {
+      type: Number,
+      default: 1
+    },
+    length: {
+      type: Number,
+      default: 1
+    },
+    stepData:{
+      type: Object,
+      default:() => ({})
+    }
+  }
+}
+</script>
+
 <style lang="stylus">
 .step
   margin-bottom 20px

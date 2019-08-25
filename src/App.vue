@@ -28,6 +28,7 @@ export default {
 <style lang="stylus">
 body 
   background: #fae8c8
+  font-size 12px
 .main
   width 990px
   margin 0 auto

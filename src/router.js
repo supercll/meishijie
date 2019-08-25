@@ -107,28 +107,6 @@ const router = new Router({
     ...viewsRoute
   ]
 })
-router.beforeEach(async (to, from, next) => {
-  const isLogin = await Store.dispatch('userInfoAction');
-
-  if(to.matched.some((o) => o.meta.login) || to.name === 'login'){
-    if(!isLogin && to.name === 'login'){
-      next();
-      return;
-    }else if(!isLogin && to.name !== 'login'){
-      Message({
-        message: '请先登录',
-        type: 'error'
-      });
-      console.log('走这里了22222')
-      next({name: 'home'});
-    }else {
-      next();
-    }
-  }else{
-    next();
-  }
-  
-})
 
 
 export default router;
