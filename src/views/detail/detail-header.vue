@@ -5,14 +5,8 @@
 
       <div class="detail-title clearfix">
           <h1 class="title">{{info.title}}</h1>
-          <span v-if="!isOwner" class="detail-collection" :class="{
-            collecte: !info.isCollection,
-            collected: info.isCollection
-          }"
-          @click="collection"
-          >
-            {{info.isCollection ? '已收藏': '收藏'}}
-            ({{info.collection_len}})
+          <span  class="detail-collection">
+            '已收藏': '收藏'
           </span>
       </div>
       
@@ -41,25 +35,11 @@
   </section>
 </template>
 <script>
-import { toggleCollection } from '@/service/api'
 export default {
   props:{
     info: {
       type: Object,
       default: () => ({})
-    }
-  },
-  computed:{
-    isOwner(){
-      return this.$store.state.userInfo._id === this.info.userId;
-    }
-  },
-  methods: {
-    async collection(){
-      let data = await toggleCollection({menuId: this.info._id});
-      this.info.collection_len = data.data.collection_len;
-      this.info.isCollection = data.data.isCollection;
-
     }
   }
 }

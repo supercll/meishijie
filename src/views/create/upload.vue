@@ -5,7 +5,6 @@
       <upload-img
         action="/api/menu/step/upload"
         :image-url="$options.imageUrl"
-        @res-url="(data) => {step.img_url = data.resImgUrl}"
         :img-max-width="184"
       ></upload-img>
     </div>
@@ -14,13 +13,10 @@
       type="textarea"
       :rows="8"
       placeholder="请输入内容"
-      v-model="step.describe"
     >
     </el-input>
     <i 
       class="delete-icon el-icon-close" 
-      :style="{display: length <= 1 ? 'none' : 'inline-block'}"
-      @click="$emit('delete-step', stepData)"
     ></i>
   </div>
 </template>
@@ -41,17 +37,6 @@ export default {
     stepData:{
       type: Object,
       default:() => ({})
-    }
-  },
-  data(){
-    return {
-      step: Object.assign(this.stepData),
-      resUrlQueen: {}
-    }
-  },
-  watch:{
-    step(){
-      this.$emit('change-step', this.stepData, this.step);
     }
   }
 }

@@ -17,9 +17,6 @@
 					</strong>
 					<em class="info"><span>粉丝：</span> {{item.follows_len}}　|　<span>关注：</span>{{item.following_len}}</em>
 					<em class="info"><span>简介：</span>爱好美食和旅游！</em>
-					<span class="time">
-						<a href="javascript:void(0);">取消关注</a>
-					</span>
 				</div>
 			</router-link>
 		</ul>
