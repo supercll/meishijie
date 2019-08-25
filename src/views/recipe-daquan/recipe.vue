@@ -12,9 +12,8 @@
         <h3>{{item.parent_name}}</h3>
         <div class="recipe-link">
           <router-link 
-            :to="{name: 'recipe', query: {parent_type:item.parent_type,classify_type: list.type}}" 
+            :to="{name: 'recipe'}" 
             v-for="list in item.list" :key="list.type"
-            :class="{active: classify_type === list.type}"
           >{{list.name}}</router-link>
         </div>
       </el-tab-pane>
@@ -36,8 +35,7 @@
                 <el-tag 
                   type="info" 
                   v-for="option in item.list" 
-                  :key="option.type" 
-                  @click="selectProperyItem(item,option)"
+                  :key="option.type"
                   :class="{'tag-selected': item.checkedType === option.type}"
                 >
                   {{option.name}}
@@ -48,6 +46,7 @@
         </div>
       </el-aside>
       <el-main>
+        <div class="recipe-loading"></div>
         <menu-card :info='menus'></menu-card>
       </el-main>
     </el-container>
@@ -55,82 +54,22 @@
 </template>
 <script>
 import MenuCard from '@/components/menu-card.vue'
-import {getProperty, getMenus} from '@/service/api'
-
+import properties from "@/mock/properties"
+import classify from "@/mock/classify"
 export default {
   components: {MenuCard},
   data(){
     return {
       activeName: '1',
-      classify_type: '',
-      properties:[],
-      propertiesActvieNames:[],
+      properties:properties,
+      propertiesActvieNames:'',
       menus:[],
-      query:{} // 查询条件
+      classify: classify
     }
   },
-  computed: {
-    classify(){
-      return this.$store.state.classify;
-    }
-  },
-  async mounted(){  // 获取property
-    let properties = await getProperty();
-    this.properties = properties.data;
-  },
-  watch: {
-    $route: {
-      handler(){
-        const {query} = this.$route;
-        let classify = query.parent_type || "1";
-        this.activeName = classify;
-        if(query.classify_type) {
-          this.classify_type = query.classify_type;
-          this.parent_type = query.classify_type[0];
-          classify = this.classify_type
-        }
-        this.getMenusByQuery(this.query = {...this.query, classify})
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    handleClick(tab, event) {
-      this.$router.push({
-        query:{
-          parent_type: this.activeName
-        }
-      })
-    },
-    selectProperyItem(item,option){
-      console.log(item.checkedType)
-      if(option.type === item.checkedType){
-        item.checkedType = false;
-      }else {
-        this.$set(item, 'checkedType', option.type);
-      }
-      let property = 
+  methods:{
+    handleClick(){
       
-      this.query = {
-        ...this.query,
-        property: {
-          ...this.query.property,
-          [option.title]: option.type
-        }
-      }
-      if(!item.checkedType) {  // 如果没有了，则删除
-        delete this.query.property[item.title];
-      }
-      this.getMenusByQuery(this.query);
-    },
-    /**  
-     * classify 菜单分类，有子级穿子级，没有传父级
-     * property:{craft:'4-2',hard: "4-4", flavor, pepole}
-     * 可组合传入
-    */
-    async getMenusByQuery(params){
-      let meuns = await getMenus(params);
-      this.menus = meuns.data.list;
     }
   }
 }
@@ -159,6 +98,7 @@ export default {
       padding 10px
       width 100%
       float left
+      box-sizing border-box
   .filter-tags 
     display flex
     flex-wrap wrap

@@ -1,7 +1,7 @@
 <template>
   <div class="login-page">
 
-    <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+    <el-tabs v-model="activeName" type="card">
       <el-tab-pane label="登录" name="login">
         <login></login>
       </el-tab-pane>
@@ -20,11 +20,6 @@ export default {
   data(){
     return {
       activeName: 'login'
-    }
-  },
-  methods: {
-    handleClick(){
-
     }
   }
 }

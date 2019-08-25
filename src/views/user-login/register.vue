@@ -21,9 +21,10 @@
   </div>
 </template>
 <script>
-  import {register} from '@/service/api'
+
   export default {
     data() {
+      // 沿正轨则
       var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
@@ -40,9 +41,9 @@
           password: ''
         },
         rules: {
-          // pass: [
-          //   //{ validator: validatePass, trigger: 'blur' }
-          // ]
+          pass: [
+            //{ validator: validatePass, trigger: 'blur' }
+          ]
         }
       };
     },
@@ -50,18 +51,7 @@
       submitForm(formName) {
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
-            await register({
-              ...this.ruleForm
-            });
-
-            this.$message({
-              message: '已注册成功，请登录',
-              type: 'success'
-            });
-
-          } else {
-            console.log('error submit!!');
-            return false;
+            // 在这里想后端发送注册信息
           }
         });
       },
