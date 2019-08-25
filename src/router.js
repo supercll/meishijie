@@ -1,9 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Store from '@/store'
+import { Message } from 'element-ui';
+Vue.use(Router)
+
 import Home from './views/home/Home.vue'
+// import MenuList from '@/views/user-space/menu-list'
 
 const Recipe = () => import( '@/views/recipe-daquan/recipe' );
 const Create = () => import( '@/views/create/create' );
+const Edit = () => import( '@/views/user-space/edit' );
 
 const Space = () => import( /* webpackChunkName: "space" */ '@/views/user-space/space');
 
@@ -24,7 +30,17 @@ const viewsRoute = [
     path: '/create',
     name: 'create',
     title: '发布菜谱',
-    component: Create
+    component: Create,
+    meta: {
+      login: true
+    }
+  },
+  {
+    path: '/edit',
+    title: '编辑个人资料',
+    name: 'edit',
+    meta: {login: true},
+    component: Edit
   },
   {
     path: '/space',
@@ -33,6 +49,9 @@ const viewsRoute = [
     component: Space,
     redirect: {
       name: 'works'
+    },
+    meta: {
+      login: true
     },
     children: [
       {
@@ -48,8 +67,8 @@ const viewsRoute = [
         component: Fans
       },
       {
-        path: 'follower',
-        name: 'follower',
+        path: 'following',
+        name: 'following',
         title: '我的关注',
         component: Fans
       },
@@ -69,9 +88,9 @@ const viewsRoute = [
   }
 ]
 
-Vue.use(Router)
 
-export default new Router({
+
+const router = new Router({
   mode: 'history',
   //base: process.env.BASE_URL,
   routes: [
@@ -88,3 +107,28 @@ export default new Router({
     ...viewsRoute
   ]
 })
+router.beforeEach(async (to, from, next) => {
+  const isLogin = await Store.dispatch('userInfoAction');
+
+  if(to.matched.some((o) => o.meta.login) || to.name === 'login'){
+    if(!isLogin && to.name === 'login'){
+      next();
+      return;
+    }else if(!isLogin && to.name !== 'login'){
+      Message({
+        message: '请先登录',
+        type: 'error'
+      });
+      console.log('走这里了22222')
+      next({name: 'home'});
+    }else {
+      next();
+    }
+  }else{
+    next();
+  }
+  
+})
+
+
+export default router;
