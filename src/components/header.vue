@@ -7,21 +7,14 @@
             <a href="" class="logo">
             </a>
           </el-col>
-          <el-col :span="10" :offset="2">
-            <!-- <el-input
-              placeholder="请输入内容"
-              suffix-icon="el-icon-search"
-            >
-            </el-input> -->
-          </el-col>
-          {{isLogin}}
+          <el-col :span="10" :offset="2"></el-col>
           <el-col :span="6" :offset="3" class="avatar-box" v-if="isLogin">
             <router-link :to="{name: 'space'}">
-              <el-avatar style="vertical-align: middle;" shape="square" size="medium" :src="userInfo.avatar"></el-avatar>
+              <el-avatar style="vertical-align: middle;" shape="square" size="medium" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"></el-avatar>
             </router-link>
-            <router-link :to="{name: 'space'}" class="user-name">{{userInfo.name}}</router-link>
+            <router-link :to="{name: 'space'}" class="user-name">测试</router-link>
             <router-link :to="{name: 'create'}" class="collection">发布菜谱</router-link>
-            <a href="javascript:;" class="collection" @click="loginOut">退出</a>
+            <a href="javascript:;" class="collection">退出</a>
           </el-col>
           <el-col :span="6" :offset="3" class="avatar-box" v-if="!isLogin">
             <router-link :to="{name: 'login'}" class="user-name">登录</router-link>
@@ -41,44 +34,7 @@
 import Menus from '@/components/menus'
 export default {
   name: 'headers',
-  data(){
-    return {
-      avatarDefaultUrl: 'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
-    }
-  },
-  components: {
-    Menus
-  },
-  computed: {
-    isLogin(){
-      return this.$store.state.isLogin
-    },
-    userInfo(){
-      return this.$store.state.userInfo
-    }
-  },
-  mounted(){
-   // this.getOwnInfo();
-  },
-  methods: {
-    loginOut(){
-      this.$confirm('确定要退出吗?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '退出成功!'
-          });
-          localStorage.removeItem('token');
-          this.$store.commit('changeLogin', false);
-          this.$router.push({
-            name: 'home'
-          })
-        });
-    }
-  }
+  components: {Menus}
 }
 </script>
 <style lang="stylus">

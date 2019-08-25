@@ -12,7 +12,7 @@
         <h3>{{item.parent_name}}</h3>
         <div class="recipe-link">
           <router-link 
-            :to="{name: 'recipe', query: {parent_type:item.parent_type,classify_type: list.type}}" 
+            :to="{name: 'recipe'}" 
             v-for="list in item.list" :key="list.type"
             :class="{active: classify_type === list.type}"
           >{{list.name}}</router-link>

@@ -8,7 +8,6 @@
         img-max-width="210"
         @res-url="(data) => {imageUrl = data.resImgUrl;}"
       ></upload-img>
-      {{imageUrl}}
     </div>
     <div class="edit-item">
       <span class="label">修改名称</span>

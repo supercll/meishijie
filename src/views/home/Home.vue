@@ -14,22 +14,16 @@
 
 <script>
 import MenuCard from '@/components/menu-card.vue'
-import { getMenus } from '@/service/api'
 
 export default {
   name: 'home',
+  components: {
+    MenuCard
+  },
   data(){
     return {
       info: []
     }
-  },
-  components: {
-    MenuCard
-  },
-  async mounted(){
-    let meuns = await getMenus();
-    console.log(meuns)
-    this.info = meuns.data.list;
   }
 }
 </script>
