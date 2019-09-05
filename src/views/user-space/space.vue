@@ -152,10 +152,7 @@ export default {
           background-color  #ff3232
         a.no-follow-at 
           background-color #999
-<<<<<<< HEAD
-=======
           
->>>>>>> static
     .user-more-info
       width 190px
       overflow hidden
