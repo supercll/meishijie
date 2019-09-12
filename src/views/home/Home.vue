@@ -7,7 +7,8 @@
     </el-carousel>
     <div>
       <h2>内容精选</h2>
-      <menu-card :margin-left="13" :info='info'></menu-card>
+      <!-- :info='info' -->
+      <menu-card :margin-left="13"></menu-card>
     </div>
   </div>
 </template>

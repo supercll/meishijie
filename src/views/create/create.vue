@@ -97,7 +97,7 @@
 </template>
 <script>
 import Stuff from './stuff'
-import Upload from './upload'
+import Upload from './step-upload'
 import UploadImg from './upload-img'
 import createMockMenuPublishData from '@/mock/publish'
 import properties from "@/mock/properties"
