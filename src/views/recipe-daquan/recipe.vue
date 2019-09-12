@@ -13,6 +13,7 @@
           <router-link 
             :to="{name: 'recipe'}" 
             v-for="list in item.list" :key="list.type"
+            class="active"
           >{{list.name}}</router-link>
         </div>
       </el-tab-pane>
