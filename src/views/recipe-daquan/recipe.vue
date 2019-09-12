@@ -36,7 +36,7 @@
                   type="info" 
                   v-for="option in item.list" 
                   :key="option.type"
-                  :class="{'tag-selected': item.checkedType === option.type}"
+                  :class="{'tag-selected': true}"
                 >
                   {{option.name}}
                 </el-tag>
@@ -45,9 +45,10 @@
           </el-collapse>
         </div>
       </el-aside>
-      <el-main>
-        <div class="recipe-loading"></div>
-        <menu-card :info='menus'></menu-card>
+      <el-main class="filter-menus-box">
+        <div class="menu-empty">暂时没有过滤出菜谱信息，请选择其他的筛选条件</div>
+        <!-- :info='menus' -->
+        <menu-card></menu-card>
       </el-main>
     </el-container>
   </div>
@@ -69,7 +70,13 @@ export default {
   },
   methods:{
     handleClick(){
-      
+      // const loading = this.$loading({
+      //   target: '.filter-menus-box',
+      //   lock: true,
+      //   text: 'Loading',
+      //   spinner: 'el-icon-loading',
+      //   background: 'rgba(0, 0, 0, 0.7)'
+      // });
     }
   }
 }
@@ -106,5 +113,9 @@ export default {
     .tag-selected
       background-color  #ff3232
       color #fff
+  .menu-empty
+    width 100% 
+    text-align center
+    font-size 20px
 </style>
 
