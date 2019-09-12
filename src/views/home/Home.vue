@@ -8,18 +8,21 @@
     <div>
       <h2>内容精选</h2>
       <!-- :info='info' -->
-      <menu-card :margin-left="13"></menu-card>
+      <waterfall>
+        <menu-card :margin-left="13"></menu-card>
+      </waterfall>
     </div>
   </div>
 </template>
 
 <script>
 import MenuCard from '@/components/menu-card.vue'
-
+import Waterfall from '@/components/waterfall.vue'
 export default {
   name: 'home',
   components: {
-    MenuCard
+    MenuCard,
+    Waterfall
   },
   data(){
     return {

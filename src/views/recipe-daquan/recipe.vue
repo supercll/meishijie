@@ -2,7 +2,6 @@
   <div class="recipe">
     <!-- v-model="activeName" -->
     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
-
       <el-tab-pane 
         :label="item.parent_name" 
         v-for="item in classify" 
