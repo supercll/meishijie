@@ -12,40 +12,28 @@
           |
           <router-link :to="{name: 'edit'}">编辑个人资料</router-link>
         </span>
-        <div class="tools" v-if="!isOwner">
-				  <a href="javascript:;" 
-            :class="{
-              'follow-at': !userInfo.isFollowing,
-              'no-follow-at': userInfo.isFollowing
-            }"
-          > {{userInfo.isFollowing ? '已关注' : '+关注'}} </a>
+        <div class="tools">
+          <!-- follow-at  no-follow-at-->
+				  <a href="javascript:;" class="follow-at"> {{userInfo.isFollowing ? '已关注' : '+关注'}} </a>
         </div>
       </div>
 
       <ul class="user-more-info">
         <li>
-          <a href="">
-            <span>关注</span>
-            <strong>{{userInfo.following_len}}</strong>
-          </a>
+          <span>关注</span>
+          <strong>{{userInfo.following_len}}</strong>
         </li>
         <li>
-          <a href="">
-            <span>粉丝</span>
-            <strong>{{userInfo.follows_len}}</strong>
-          </a>
+          <span>粉丝</span>
+          <strong>{{userInfo.follows_len}}</strong>
         </li>
         <li>
-          <a href="">
-            <span>收藏</span>
-            <strong>{{userInfo.collections_len}}</strong>
-          </a>
+          <span>收藏</span>
+          <strong>{{userInfo.collections_len}}</strong>
         </li>
         <li>
-          <a href="">
-            <span>发布菜谱</span>
-            <strong>{{userInfo.work_menus_len}}</strong>
-          </a>
+          <span>发布菜谱</span>
+          <strong>{{userInfo.work_menus_len}}</strong>
         </li>
       </ul>
     </div>
@@ -80,10 +68,10 @@ const getOtherInfo = {
   async following(params){  // 关注
     return (await following(params)).data;
   },
-  async fans(params){  // 关注
+  async fans(params){  // 粉丝
     return (await fans(params)).data;
   },
-  async collection(params){
+  async collection(params){ // 收藏
     return (await collection(params)).data;
   }
 }
