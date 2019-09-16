@@ -20,20 +20,28 @@
 
       <ul class="user-more-info">
         <li>
-          <span>关注</span>
-          <strong>{{userInfo.following_len}}</strong>
+          <div>
+            <span>关注</span>
+            <strong>{{userInfo.following_len}}</strong>
+          </div>
         </li>
         <li>
-          <span>粉丝</span>
-          <strong>{{userInfo.follows_len}}</strong>
+          <div>
+            <span>粉丝</span>
+            <strong>{{userInfo.follows_len}}</strong>
+          </div>
         </li>
         <li>
-          <span>收藏</span>
-          <strong>{{userInfo.collections_len}}</strong>
+          <div>
+            <span>收藏</span>
+            <strong>{{userInfo.collections_len}}</strong>
+          </div>
         </li>
         <li>
-          <span>发布菜谱</span>
-          <strong>{{userInfo.work_menus_len}}</strong>
+          <div>
+            <span>发布菜谱</span>
+            <strong>{{userInfo.work_menus_len}}</strong>
+          </div>
         </li>
       </ul>
     </div>
@@ -152,7 +160,7 @@ export default {
         border-bottom-right-radius 0
         margin 0px 8px 8px 0px
         float left
-        a
+        div
           display block
           height 81px
           width 81px
