@@ -7,9 +7,7 @@
         <h3>主料</h3>
         <ul>
           <li class="" v-for="n in 5" :key="n">
-            <h4>
-              姜
-            </h4>
+            姜
             <span>20克</span>
           </li>
         </ul>
@@ -18,9 +16,7 @@
         <h3>辅料</h3>
         <ul>
           <li class="" v-for="n in 5" :key="n">
-            <h4>
-              姜
-            </h4>
+            姜
             <span>20克</span>
           </li>
         </ul>
@@ -79,9 +75,10 @@
         li 
           float left
           box-sizing border-box
-          width 217px
-          margin 0 5px 5px 5px
+          width 100px
           height 54px
+          line-height 54px
+          margin 0 5px 5px 5px
           padding-left 30px
           border 1px solid #eee
   .detail-explain
