@@ -8,7 +8,8 @@
 		</div>
     <div class="info-empty" v-if="!info.length">
 			<div>
-				<p>还没有发布作品</p>
+				<p>还没有收藏任何的菜谱，去搜自己喜欢的菜谱，收藏起来吧。</p>
+        <a href="">菜谱大全</a>
 			</div>
 		</div>
     <menu-card  v-if="info.length" :margin-left="13" :info="info"></menu-card>
