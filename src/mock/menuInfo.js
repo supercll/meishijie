@@ -12,7 +12,7 @@ export default [
     "classify": "2-3", // 菜谱分类
     "userId": "5d613120ac558b4d879824b5",  // 发布者id
     "name": "关羽", // 发布者名称
-    "commnet_num": 26 // 评论数
+    "comments_len": 26 // 评论数
   },
   {
     "property": {
@@ -27,6 +27,6 @@ export default [
     "classify": "1-3",
     "userId": "5d613121ac558b4d879824bc",
     "name": "曹丕",
-    "commnet_num": 26 
+    "comments_len": 26 
   }
 ]
