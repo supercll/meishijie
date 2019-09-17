@@ -115,6 +115,7 @@ export async function userInfo(params){
  * @param {string} [params.userId] - 指定用户的菜单
  * @param {string} [params.classify] - 按照菜单分类，进行筛选
  * @param {string} [params.property] - 指定菜单属性进行筛选
+ * @param {string} [params.page] - 指定页码
  * @returns
  */
 export async function getMenus(params){

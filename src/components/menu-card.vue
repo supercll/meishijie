@@ -13,7 +13,7 @@
           <img :src="item.product_pic_url" class="image" style="width: 232px;height: 232px;">
           <div style="padding: 14px;" class="menu-card-detail">
             <strong>{{item.title}}</strong>
-            <span>26 评论</span>
+            <span>{{item.commnet_num}} 评论</span>
             <router-link 
               :to="{name: 'space', query:{userId: item.userId}}"
               tag="em"
