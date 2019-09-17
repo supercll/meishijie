@@ -1,6 +1,7 @@
 <template>
   <div class="recipe">
     <!-- v-model="activeName" -->
+    <!-- 菜谱分类 start -->
     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
       <el-tab-pane 
         :label="item.parent_name" 
@@ -18,12 +19,14 @@
         </div>
       </el-tab-pane>
     </el-tabs>
+    <!-- 菜谱分类 end -->
     <h2>家常好味道，给你家一般的温暖</h2>
     <el-container>
       <el-aside width="220px" class="recipe-aside">
         <div class="filter-box">
           <h4>筛选</h4>
           <!-- v-model="activeName" -->
+          <!-- 筛选 start -->
           <el-collapse v-model="propertiesActvieNames">
             <el-collapse-item 
               v-for="item in properties"
@@ -43,6 +46,7 @@
               </div>
             </el-collapse-item>
           </el-collapse>
+          <!-- 筛选 end -->
         </div>
       </el-aside>
       <el-main class="filter-menus-box">
@@ -70,13 +74,13 @@ export default {
   },
   methods:{
     handleClick(){
-      // const loading = this.$loading({
-      //   target: '.filter-menus-box',
-      //   lock: true,
-      //   text: 'Loading',
-      //   spinner: 'el-icon-loading',
-      //   background: 'rgba(0, 0, 0, 0.7)'
-      // });
+      const loading = this.$loading({
+        target: '.filter-menus-box',
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
     }
   }
 }
