@@ -9,7 +9,7 @@
 import DetailHeader from './detail-header'
 import DetailContent from './detail-content'
 import Comment from './comment'
-import { menuInfo, toggleCollection } from '@/service/api'
+
 export default {
   components: {DetailHeader, DetailContent, Comment}
 }
