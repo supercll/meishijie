@@ -5,7 +5,6 @@ import { Message } from 'element-ui';
 Vue.use(Router)
 
 import Home from './views/home/Home.vue'
-// import MenuList from '@/views/user-space/menu-list'
 
 const Recipe = () => import( '@/views/recipe-daquan/recipe' );
 const Create = () => import( '@/views/create/create' );
@@ -92,7 +91,6 @@ const viewsRoute = [
 
 const router = new Router({
   mode: 'history',
-  //base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -104,7 +102,14 @@ const router = new Router({
       name: 'login',
       component: Login
     },
-    ...viewsRoute
+    ...viewsRoute,
+    {
+      path: '*',
+      name: 'noFound',
+      redirect: {
+        name: 'home'
+      }
+    }
   ]
 })
 

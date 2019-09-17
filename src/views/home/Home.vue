@@ -1,10 +1,17 @@
 <template>
   <div class="home">
+    <!-- 轮播 start -->
     <el-carousel :interval="5000" type="card" height="300px">
       <el-carousel-item v-for="item in 6" :key="item">
-        <img src="https://s1.st.meishij.net/rs/208/102/1025708/n1025708_156144944939153.jpg" width="100%" height="300px" alt="">
+        <img 
+          src="https://s1.st.meishij.net/rs/208/102/1025708/n1025708_156144944939153.jpg" 
+          width="100%" height="300px" 
+          alt=""
+        >
       </el-carousel-item>
     </el-carousel>
+    <!-- 轮播 end -->
+    <!-- 内容精选 瀑布流形式 start -->
     <div>
       <h2>内容精选</h2>
       <!-- :info='info' -->
@@ -12,12 +19,14 @@
         <menu-card :margin-left="13"></menu-card>
       </waterfall>
     </div>
+    <!-- 内容精选 瀑布流形式 end -->
   </div>
 </template>
 
 <script>
 import MenuCard from '@/components/menu-card.vue'
 import Waterfall from '@/components/waterfall.vue'
+
 export default {
   name: 'home',
   components: {

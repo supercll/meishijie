@@ -11,6 +11,11 @@ import DetailContent from './detail-content'
 import Comment from './comment'
 
 export default {
-  components: {DetailHeader, DetailContent, Comment}
+  components: {DetailHeader, DetailContent, Comment},
+  data(){
+    return {
+      menuInfo:{}
+    }
+  }
 }
 </script>

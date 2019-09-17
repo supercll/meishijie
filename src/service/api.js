@@ -49,6 +49,10 @@ const request = new HttpRequest({
 
 const http = request.request();
 
+// 获取banner数据
+export async function getProperty(){
+  return await http.get('/banner');
+}
 
 // 获取所有属性分类
 export async function getProperty(){
