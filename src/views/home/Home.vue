@@ -26,7 +26,7 @@
 <script>
 import MenuCard from '@/components/menu-card.vue'
 import Waterfall from '@/components/waterfall.vue'
-
+import {getBanner, getMenus} from '@/service/api.js'
 export default {
   name: 'home',
   components: {
