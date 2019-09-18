@@ -5,7 +5,7 @@
       <el-carousel-item v-for="item in 6" :key="item">
         <img 
           src="https://s1.st.meishij.net/rs/208/102/1025708/n1025708_156144944939153.jpg" 
-          width="100%" height="300px" 
+          width="100%"
           alt=""
         >
       </el-carousel-item>
