@@ -36,7 +36,7 @@
                   :key="option"
                   :class="{'tag-selected': true}"
                 >
-                  {{option.name}}
+                  测试
                 </el-tag>
               </div>
             </el-collapse-item>

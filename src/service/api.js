@@ -45,17 +45,17 @@ const request = new HttpRequest({
 const http = request.request();
 
 // 获取banner数据
-export async function getBanner(){
-  return await http.get('/banner');
+export function getBanner(){
+  return http.get('/banner');
 }
 
 // 获取所有属性分类
-export async function getProperty(){
-  return await http.get('/menu/property');
+export function getProperty(){
+  return http.get('/menu/property');
 }
 // 获取所有菜谱分类
-export async function getClassify(){
-  return await http.get('/menu/classify');
+export function getClassify(){
+  return http.get('/menu/classify');
 }
 
 /**
@@ -64,8 +64,8 @@ export async function getClassify(){
  * @param {Object} params - 参考mock的数据
  * @returns
  */
-export async function publish(params){
-  return await http.post('/menu/publish', params);
+export function publish(params){
+  return http.post('/menu/publish', params);
 }
 
 /**
@@ -76,8 +76,8 @@ export async function publish(params){
  * @param {Object} params.password - 密码
  * @returns
  */
-export async function register(params){
-  return await http.post('/user/create', params);
+export function register(params){
+  return http.post('/user/create', params);
 }
 
 /**
@@ -88,8 +88,8 @@ export async function register(params){
  * @param {string} params.password - 密码
  * @returns
  */
-export async function login(params){
-  return await http.post('/user/login', params);
+export function login(params){
+  return http.post('/user/login', params);
 }
 
 /**
@@ -99,8 +99,8 @@ export async function login(params){
  * @param {string} params.userId - 用户id
  * @returns
  */
-export async function userInfo(params){
-  return await http.post('/user/info', params);
+export function userInfo(params){
+  return http.post('/user/info', params);
 }
 
 /**
@@ -113,8 +113,8 @@ export async function userInfo(params){
  * @param {string} [params.page] - 指定页码
  * @returns
  */
-export async function getMenus(params){
-  return await http.get('/menu/query', {params});
+export function getMenus(params){
+  return http.get('/menu/query', {params});
 }
 
 /**
@@ -124,8 +124,8 @@ export async function getMenus(params){
  * @param {string} [params.menuId] - 指定菜单的id
  * @returns
  */
-export async function menuInfo(params){
-  return await http.get('/menu/menuInfo', {params});
+export function menuInfo(params){
+  return http.get('/menu/menuInfo', {params});
 }
 
 /**
@@ -135,8 +135,8 @@ export async function menuInfo(params){
  * @param {string} [params.menuId] - 指定要收藏的菜单的id
  * @returns
  */
-export async function toggleCollection(params){
-  return await http.post('/user/collection', params);
+export function toggleCollection(params){
+  return http.post('/user/collection', params);
 }
 /**
  * toggle 关注。关注的取消关注；没关注的，要关注。
@@ -145,8 +145,8 @@ export async function toggleCollection(params){
  * @param {string} [params.followUserId] - 指定要关注的用户的id
  * @returns
  */
-export async function toggleFollowing(params){
-  return await http.post('/user/following', params);
+export function toggleFollowing(params){
+  return http.post('/user/following', params);
 }
 
 /**
@@ -156,8 +156,8 @@ export async function toggleFollowing(params){
  * @param {string} [params.userId] - 指定的用户id
  * @returns
  */
-export async function collection(params){
-  return await http.get('/user/collection', {params});
+export function collection(params){
+  return http.get('/user/collection', {params});
 }
 
 /**
@@ -167,8 +167,8 @@ export async function collection(params){
  * @param {string} [params.userId] - 指定的用户id
  * @returns
  */
-export async function following(params){
-  return await http.get('/user/following', {params});
+export function following(params){
+  return http.get('/user/following', {params});
 }
 
 /**
@@ -178,6 +178,6 @@ export async function following(params){
  * @param {string} [params.userId] - 指定的用户id
  * @returns
  */
-export async function fans(params){
-  return await http.get('/user/fans', {params});
+export function fans(params){
+  return http.get('/user/fans', {params});
 }

@@ -32,11 +32,6 @@ export default {
   components: {
     MenuCard,
     Waterfall
-  },
-  data(){
-    return {
-      info: []
-    }
   }
 }
 </script>
