@@ -3,6 +3,7 @@
     <!-- :rules="rules" -->
     <el-form 
       label-position="top"
+      :rules="rules"
       :model="ruleForm" status-icon 
        ref="ruleForm" label-width="100px" class="demo-ruleForm"
     >
@@ -22,25 +23,17 @@
 <script>
 export default {
   data() {
-    // 验证规则
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'));
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass');
-        }
-        callback();
-      }
-    };
     return {
       ruleForm: {
         name: '',
-        checkPass: ''
+        password: ''
       },
       rules: {
-        checkPass: [
-          { validator: validatePass, trigger: 'blur' }
+        name: [
+          { required: true, message: '请输入活动名称', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
         ]
       }
     };

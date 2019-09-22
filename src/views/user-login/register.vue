@@ -5,6 +5,7 @@
       label-position="top"
       :model="ruleForm" 
       status-icon 
+      :rules="rules"
       ref="ruleForm" label-width="100px" class="demo-ruleForm"
     >
       <el-form-item label="姓名" prop="name">
@@ -24,25 +25,17 @@
 
   export default {
     data() {
-      // 沿正轨则
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          if (this.ruleForm.checkPass !== '') {
-            this.$refs.ruleForm.validateField('checkPass');
-          }
-          callback();
-        }
-      };
       return {
         ruleForm: {
           name: '',
           password: ''
         },
         rules: {
-          pass: [
-            //{ validator: validatePass, trigger: 'blur' }
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: '请输入密码', trigger: 'blur' }
           ]
         }
       };
