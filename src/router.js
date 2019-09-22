@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Store from '@/store'
-import { Message } from 'element-ui';
+
 Vue.use(Router)
 
 import Home from './views/home/Home.vue'

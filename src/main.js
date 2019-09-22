@@ -8,8 +8,6 @@ import "./assets/css/index.styl";
 import "./assets/css/over-write.styl";
 Vue.use(ElementUI);
 
-Vue.prototype.bus = new Vue();
-
 Vue.config.productionTip = false
 
 new Vue({
