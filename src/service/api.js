@@ -7,10 +7,6 @@ class HttpRequest {
     }
     this.defaults = Object.assign(this.defaults, options);
   }
-  setConfig(){
-
-  }
-
   interceptors(install){
     install.interceptors.request.use(
       config => {
@@ -36,7 +32,6 @@ class HttpRequest {
   }
   request(options){
     options = Object.assign(this.defaults, options)
-    console.log(options);
     const instance = axios.create(options)
     this.interceptors(instance);
     return instance

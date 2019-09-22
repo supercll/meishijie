@@ -8,7 +8,7 @@
     >
       <el-card :body-style="{ padding: '0px' }">
         <router-link 
-          :to="{name: 'detail'}" 
+          :to="{name: 'detail'}"
         >
           <img :src="item.product_pic_url" class="image" style="width: 232px;height: 232px;">
           <div style="padding: 14px;" class="menu-card-detail">
