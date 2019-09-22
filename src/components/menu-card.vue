@@ -7,18 +7,13 @@
       :style="{'margin-left':marginLeft+'px'}"
     >
       <el-card :body-style="{ padding: '0px' }">
-        <router-link 
-          :to="{name: 'detail'}"
-        >
-          <img :src="item.product_pic_url" class="image" style="width: 232px;height: 232px;">
+        <router-link>
+          <img src="" class="image" style="width: 232px;height: 232px;">
           <div style="padding: 14px;" class="menu-card-detail">
-            <strong>{{item.title}}</strong>
-            <span>{{item.comments_len}} 评论</span>
-            <router-link 
-              :to="{name: 'space', query:{userId: item.userId}}"
-              tag="em"
-            >
-            {{item.name}}
+            <strong>测试</strong>
+            <span>0 评论</span>
+            <router-link>
+            测试
             </router-link>
           </div>
         </router-link> 
@@ -27,7 +22,7 @@
   </el-row>
 </template>
 <script>
-import menuInfo from "@/mock/menuInfo"
+
 export default {
   name: 'menu-card',
   props:{
@@ -37,7 +32,7 @@ export default {
     },
     info:{
       type: Array,
-      default:() => [...menuInfo]
+      default:() => []
     }
   }
 }
