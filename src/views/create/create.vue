@@ -7,15 +7,15 @@
       <h5>属性</h5>
       <div>
         <el-select
-          v-for="item in properties"
+          v-for="item in 3"
           :key="item.parent_type"
-          :value="1"
+          value="测试"
         >
           <el-option
-            v-for="option in item.list"
-            :key="option.type"
+            v-for="option in 3"
+            :key="option"
             :label="option.name"
-            :value="1"
+            value="1"
           >
           </el-option>
         </el-select>
@@ -24,14 +24,14 @@
       <div>
         <el-select placeholder="请选择菜谱分类">
           <el-option-group
-            v-for="group in classify"
-            :key="group.parent_type"
-            :label="group.parent_name">
+            v-for="group in 1"
+            :key="group"
+            label="测试">
             <el-option
-              v-for="item in group.list"
-              :key="item.type"
-              :label="item.name"
-              :value="item.type">
+              v-for="item in 3"
+              :key="item"
+              label="测试"
+              :value="item">
             </el-option>
           </el-option-group>
         </el-select>
@@ -99,10 +99,6 @@
 import Stuff from './stuff'
 import Upload from './step-upload'
 import UploadImg from '@/components/upload-img'
-import createMockMenuPublishData from '@/mock/publish'
-import properties from "@/mock/properties"
-import classify from "@/mock/classify"
-import userInfo from '@/mock/userInfo';
 
 const properties_placeholder = { "craft": "请选择工艺", "flavor": "请选择口味", "hard": "请选择难度", "people": "请选择人数" };
 const step_struct = {
@@ -137,7 +133,7 @@ export default {
       title: '',  // 标题
       product_pic_url: '', // 成品图URL
       product_story: '', // 成品图故事
-      properties: properties,  // 属性
+      properties: {},  // 属性
       raw_material: {
         main_material:[],  // 主料
         accessories_material: [] // 辅料
@@ -147,7 +143,7 @@ export default {
       steps: Array(3).fill(1).map(item => Object.assign({inter_id: Math.random()}, step_struct)),
       // 小技巧
       skill: '',
-      classify: classify,
+      classify: {},
       loading_icon: ''
     }
   },
@@ -156,7 +152,7 @@ export default {
   },
   computed:{
     userInfo(){
-      return userInfo;
+      return {};
     }
   },
   methods:{

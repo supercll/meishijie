@@ -15,9 +15,7 @@
       placeholder="请输入内容"
     >
     </el-input>
-    <i 
-      class="delete-icon el-icon-close" 
-    ></i>
+    <i class="delete-icon el-icon-close"></i>
   </div>
 </template>
 <script>

@@ -47,7 +47,15 @@
       <el-main class="filter-menus-box">
         <div class="menu-empty">暂时没有过滤出菜谱信息，请选择其他的筛选条件</div>
         <!-- :info='menus' -->
-        <menu-card></menu-card>
+        <menu-card style="min-height: 75%;"></menu-card>
+        <div style="text-align: right;">
+          <el-pagination
+            style="display: inline-block;"
+            :page-size="10"
+            layout="total, prev, pager, next"
+            :total="100">
+          </el-pagination>
+        </div>
       </el-main>
     </el-container>
   </div>
