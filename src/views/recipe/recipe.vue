@@ -2,20 +2,16 @@
   <div class="recipe">
     <!-- v-model="activeName" -->
     <!-- 菜谱分类 start -->
-    <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
+    <el-tabs type="border-card">
       <el-tab-pane 
-        :label="item.parent_name" 
-        v-for="item in classify" 
-        :key="item.parent_type"
-        :name="item.parent_type"
+        label="家常菜谱" 
+        v-for="item in 3" 
+        :key="item"
       >
-        <h3>{{item.parent_name}}</h3>
         <div class="recipe-link">
-          <router-link 
-            :to="{name: 'recipe'}" 
-            v-for="list in item.list" :key="list.type"
-            class="active"
-          >{{list.name}}</router-link>
+          <router-link to="" class="active">
+            私房菜
+          </router-link>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -27,18 +23,17 @@
           <h4>筛选</h4>
           <!-- v-model="activeName" -->
           <!-- 筛选 start -->
-          <el-collapse v-model="propertiesActvieNames">
+          <el-collapse>
             <el-collapse-item 
-              v-for="item in properties"
-              :key="item.parent_type"
-              :title="item.parent_name" 
-              :name="item.parent_type"
+              v-for="item in 4"
+              :key="item"
+              title="item"
             >
               <div class="filter-tags">
                 <el-tag 
                   type="info" 
-                  v-for="option in item.list" 
-                  :key="option.type"
+                  v-for="option in 4" 
+                  :key="option"
                   :class="{'tag-selected': true}"
                 >
                   {{option.name}}
@@ -59,30 +54,8 @@
 </template>
 <script>
 import MenuCard from '@/components/menu-card.vue'
-import properties from "@/mock/properties"
-import classify from "@/mock/classify"
 export default {
-  components: {MenuCard},
-  data(){
-    return {
-      activeName: '1',
-      properties:properties,
-      propertiesActvieNames:'',
-      menus:[],
-      classify: classify
-    }
-  },
-  methods:{
-    handleClick(){
-      const loading = this.$loading({
-        target: '.filter-menus-box',
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      });
-    }
-  }
+  components: {MenuCard}
 }
 </script>
 <style lang="stylus">
