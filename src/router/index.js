@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Store from '@/store'
-
 Vue.use(Router)
 
-import Home from '@/views/home/Home.vue'
+import Store from '@/store'
+
+import Home from '@/views/home/Home.vue'   // 引入组件 打包会打包在文件中，如果都用import的话，所有组件都会打包在一个文件中，导致文件很大
+
+// 按需加载，访问路径的时候才会加载，不访问，不加载
 
 const Recipe = () => import( '@/views/recipe/recipe' );
 const Create = () => import( '@/views/create/create' );
 const Edit = () => import( '@/views/user-space/edit' );
 
 const Space = () => import( /* webpackChunkName: "space" */ '@/views/user-space/space');
-
 const MenuList = () => import( /* webpackChunkName: "space" */ '@/views/user-space/menu-list');
 const Fans = () => import( /* webpackChunkName: "space" */ '@/views/user-space/fans');
 
@@ -90,7 +91,7 @@ const viewsRoute = [
 
 
 const router = new Router({
-  mode: 'history',
+  mode: 'history',  // hash http://localhost:8081#home   http://localhost:8081/home
   routes: [
     {
       path: '/',

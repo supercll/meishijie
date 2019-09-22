@@ -8,8 +8,10 @@ class HttpRequest {
     this.defaults = Object.assign(this.defaults, options);
   }
   interceptors(install){
+    // 拦截请求，给请求的数据或者头信息添加一些数据
     install.interceptors.request.use(
       config => {
+        
         let token = localStorage.getItem('token');
         if (token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
           config.headers.authorization = `token ${token}`;
@@ -20,6 +22,7 @@ class HttpRequest {
         return Promise.reject(err);
       }
     );
+    // 拦截响应，给响应的数据添加一些数据
     install.interceptors.response.use(
       res => {
         const { data, status } = res;
@@ -32,7 +35,7 @@ class HttpRequest {
   }
   request(options){
     options = Object.assign(this.defaults, options)
-    const instance = axios.create(options)
+    const instance = axios.create(options); // 请求的子实例
     this.interceptors(instance);
     return instance
   }
@@ -42,7 +45,7 @@ const request = new HttpRequest({
   baseURL: '/api'
 });
 
-const http = request.request();
+const http = request.request(); // 请求的实例，axios的实例
 
 // 获取banner数据
 export function getBanner(){
