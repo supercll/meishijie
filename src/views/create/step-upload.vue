@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import UploadImg from './upload-img'
+import UploadImg from '@/components/upload-img'
 export default {
   components: {UploadImg},
   imageUrl: 'https://s1.c.meishij.net/n/images/upload_step_img.png',

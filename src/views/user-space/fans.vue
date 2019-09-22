@@ -7,14 +7,14 @@
 		</div>
 		
 		<ul class="fans clearfix">
-			<router-link :to="{name: 'space',query: {userId: item._id}}" tag="li" v-for="item in info" :key="item._id">
+			<router-link to="" tag="li" v-for="item in 3" :key="item">
 				<a href="javascript:;" class="img">
 				<img src="https://s1.st.meishij.net/user/154/01/t62904_152386836353255.jpg"></a>
 				<div class="c">
 					<strong class="name">
-						<router-link :to="{name: 'space',query: {userId: item._id}}">{{item.name}}</router-link>
+						<router-link :to="{}">测试</router-link>
 					</strong>
-					<em class="info"><span>粉丝：</span> {{item.follows_len}}　|　<span>关注：</span>{{item.following_len}}</em>
+					<em class="info"><span>粉丝：</span> 0　|　<span>关注：</span>0</em>
 					<em class="info"><span>简介：</span>爱好美食和旅游！</em>
 				</div>
 			</router-link>

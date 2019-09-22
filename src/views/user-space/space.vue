@@ -3,18 +3,18 @@
     <h2>欢迎来到我的美食空间</h2>
     <div class="user-info">
       <div class="user-avatar">
-        <img :src="userInfo.avatar" alt="">
+        <img src="" alt="">
       </div>
       <div class="user-main">
-        <h1>{{userInfo.name}}</h1>
+        <h1>测试</h1>
         <span class="info">
-          <em>{{userInfo.createdAt}}加入美食杰</em>
+          <em>测试加入美食杰</em>
           |
-          <router-link :to="{name: 'edit'}">编辑个人资料</router-link>
+          <router-link :to="{}">编辑个人资料</router-link>
         </span>
         <div class="tools">
           <!-- follow-at  no-follow-at-->
-				  <a href="javascript:;" class="follow-at"> {{userInfo.isFollowing ? '已关注' : '+关注'}} </a>
+				  <a href="javascript:;" class="follow-at"> '已关注' : '+关注' </a>
         </div>
       </div>
 
@@ -22,32 +22,32 @@
         <li>
           <div>
             <span>关注</span>
-            <strong>{{userInfo.following_len}}</strong>
+            <strong>0</strong>
           </div>
         </li>
         <li>
           <div>
             <span>粉丝</span>
-            <strong>{{userInfo.follows_len}}</strong>
+            <strong>0</strong>
           </div>
         </li>
         <li>
           <div>
             <span>收藏</span>
-            <strong>{{userInfo.collections_len}}</strong>
+            <strong>0</strong>
           </div>
         </li>
         <li>
           <div>
             <span>发布菜谱</span>
-            <strong>{{userInfo.work_menus_len}}</strong>
+            <strong>0</strong>
           </div>
         </li>
       </ul>
     </div>
 
     <!-- v-model="activeName" -->
-    <el-tabs v-model="activeName" class="user-nav"  @tab-click="handleClick">
+    <el-tabs class="user-nav">
       <el-tab-pane label="作品" name="works"></el-tab-pane>
       <el-tab-pane label="粉丝" name="fans"></el-tab-pane>
       <el-tab-pane label="关注" name="following"></el-tab-pane>
@@ -59,7 +59,7 @@
       <!-- <menu-card :margin-left="13"></menu-card> -->
       <!-- 粉丝 & 关注 布局 -->
       <!-- <Fans></Fans> -->
-      <router-view :info="info"></router-view>
+      <router-view></router-view>
     </div>
 
   </div>
@@ -67,7 +67,6 @@
 <script>
 import MenuCard from '@/components/menu-card.vue'
 import Fans from './fans'
-import userInfo from '@/mock/userInfo';
 
 const getOtherInfo = {
   async works(params){  // 作品
@@ -85,20 +84,7 @@ const getOtherInfo = {
 }
 
 export default {
-  components: {MenuCard, Fans},
-  data(){
-    return {
-      activeName: 'works',
-      isOwner: true,  // 是否是自己
-      currentUserId: '',
-      userInfo: userInfo,
-      info:[],
-      getInfoUserId: '' // 需要获取的用户id
-    }
-  },
-  methods:{
-    handleClick(){}
-  }
+  components: {MenuCard, Fans}
 }
 </script>
 

@@ -98,7 +98,7 @@
 <script>
 import Stuff from './stuff'
 import Upload from './step-upload'
-import UploadImg from './upload-img'
+import UploadImg from '@/components/upload-img'
 import createMockMenuPublishData from '@/mock/publish'
 import properties from "@/mock/properties"
 import classify from "@/mock/classify"

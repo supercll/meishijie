@@ -2,12 +2,7 @@
   <div class="edit">
     <div class="edit-item">
       <span class="label">修改头像</span>
-      <upload-img 
-        action="/api/user/avatar"
-        :image-url="imageUrl"
-        img-max-width="210"
-        @res-url="(data) => {imageUrl = data.resImgUrl;}"
-      ></upload-img>
+      <upload-img></upload-img>
     </div>
     <div class="edit-item">
       <span class="label">修改名称</span>
@@ -31,14 +26,9 @@
   </div>
 </template>
 <script>
-import UploadImg from '@/views/create/upload-img'
+import UploadImg from '@/components/upload-img'
 export default {
-  components: {UploadImg},
-  data(){
-    return {
-      imageUrl: 'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
-    }
-  }
+  components: {UploadImg}
 }
 </script>
 <style lang="stylus">
