@@ -4,7 +4,7 @@ import Store from '@/store'
 
 Vue.use(Router)
 
-import Home from './views/home/Home.vue'
+import Home from '@/views/home/Home.vue'
 
 const Recipe = () => import( '@/views/recipe/recipe' );
 const Create = () => import( '@/views/create/create' );
