@@ -1,4 +1,5 @@
 // vue.config.js
+// webpack开发者自己写的配置，vue-cli会把开发者写的配置合并到内置的webpack配置中。
 module.exports = {
   publicPath: '/',
   devServer: {

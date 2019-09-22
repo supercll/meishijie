@@ -95,17 +95,20 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
+      title: '首页',
       component: Home
     },
     {
       path: '/login',
       name: 'login',
+      title: '登录页',
       component: Login
     },
     ...viewsRoute,
     {
       path: '*',
       name: 'noFound',
+      title: '未找到',
       redirect: {
         name: 'home'
       }
