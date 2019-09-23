@@ -19,18 +19,9 @@
 </template>
 <script>
 import Header from '@/components/header'
-import {getBanner} from '@/service/api.js'
 export default {
   components: {
     Header
-  },
-  async mounted(){
-    // getBanner().then((data) => {
-    //   console.log(data);
-    // });
-
-    const data = await getBanner();
-    console.log(data);
   }
 }
 </script>
