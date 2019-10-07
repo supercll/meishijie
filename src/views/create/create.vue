@@ -40,8 +40,8 @@
       <div class="upload-img-box clearfix">
         <div class="upload-img">
           <upload-img
-            action="/api/menu/product/upload"
-            :image-url="product_pic_url"
+            action=""
+            image-url="https://s1.c.meishij.net/n/images/upload_big_img.png?_=1561906961"
           ></upload-img>
         </div>
         <el-input
@@ -68,8 +68,8 @@
     <h2>开始写步骤了！能否简单易学就看你怎么写了，加油！</h2>
     <section class="create-introduce">
       <Upload 
-        v-for="(item) in steps" 
-        :key="item.inter_id"
+        v-for="(item) in 3" 
+        :key="item"
       ></Upload>
       <el-button 
         class="eaeaea add-step-button" 
@@ -90,7 +90,7 @@
       class="send" 
       type="primary" 
       size="medium" 
-      :icon="loading_icon"
+      icon="el-icon-loading"
     >搞定，提交审核</el-button>
 
   </div>
@@ -99,13 +99,7 @@
 import Stuff from './stuff'
 import Upload from './step-upload'
 import UploadImg from '@/components/upload-img'
-
-const properties_placeholder = { "craft": "请选择工艺", "flavor": "请选择口味", "hard": "请选择难度", "people": "请选择人数" };
-const step_struct = {
-  img_url: '',
-  describe: '',
-}
-// 向后端发送的数据
+// 向后端发送的数据结构
 const backData = {
   title: '',  // 标题
   product_pic_url: '', // 成品图URL
@@ -124,39 +118,10 @@ const backData = {
   classify: '', // 菜谱分类
   skill: '',
 }
+
 export default {
   name: 'create',
-  components: {Stuff,Upload,UploadImg},
-  properties_placeholder,
-  data(){
-    return {
-      title: '',  // 标题
-      product_pic_url: '', // 成品图URL
-      product_story: '', // 成品图故事
-      properties: {},  // 属性
-      raw_material: {
-        main_material:[],  // 主料
-        accessories_material: [] // 辅料
-      },
-      product_pic_url: 'https://s1.c.meishij.net/n/images/upload_big_img.png?_=1561906961',
-      // 步骤
-      steps: Array(3).fill(1).map(item => Object.assign({inter_id: Math.random()}, step_struct)),
-      // 小技巧
-      skill: '',
-      classify: {},
-      loading_icon: ''
-    }
-  },
-  mounted(){
-    
-  },
-  computed:{
-    userInfo(){
-      return {};
-    }
-  },
-  methods:{
-  }
+  components: {Stuff,Upload,UploadImg}
 }
 </script>
 <style lang="stylus">
